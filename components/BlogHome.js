@@ -1,19 +1,34 @@
 import SingleBlog from "./SingleBlog";
 import styled from "styled-components";
-import image from "../public/stripeImage.png";
 const Blog = ({}) => {
   return (
     <>
       <Hero className="mb-10 border bg">
-        <h1 className="hero-txt">
-          Welcome To <span>Whisper</span> <span>EE</span>
-        </h1>
+        <div className="hero-hdng-con">
+          <h1 className="hero-txt">
+            Welcome To <span>Whisper</span>{" "}
+          </h1>
+          <span>
+            <img src="/bird-64.png" alt="logo" />
+          </span>
+        </div>
         <p className="hero-txt-des mb-10">Whispering to your Eyes and Ears</p>
-        <div className="hero-balls">
-          <figure className=""></figure>
-          <figure className=""></figure>
-          <figure className=""></figure>
-          <figure className=""></figure>
+        <div className="hero-cards">
+          <figure className="">
+            <img src="/whisper1.jpeg" alt="" />
+          </figure>
+          <figure className="">
+            <img src="/whisper2.jpeg" alt="" />
+          </figure>
+          <figure className="">
+            <img src="/whisper3.jpeg" alt="" />
+          </figure>
+          <figure className="">
+            <img src="/whisper4.jpg" alt="" />
+          </figure>
+          <figure className="">
+            <img src="/whisper5.jpeg" alt="" />
+          </figure>
         </div>
       </Hero>
       <Suggested className="mb-10 border"></Suggested>
@@ -25,7 +40,12 @@ const Blog = ({}) => {
 
 export default Blog;
 const Hero = styled.div`
-  height: 35vh;
+  min-height: 35vh;
+  .hero-hdng-con {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .hero-txt,
   .hero-txt span {
     font-size: 30px;
@@ -37,27 +57,36 @@ const Hero = styled.div`
   .hero-txt-des {
     text-align: center;
   }
-  .hero-balls {
-    display: flex;
-    justify-content: center;
-    height: 35vh;
-    figure {
-      display: inline-block;
-      height: 20vh;
-      width: 20vh;
-      margin: 0 auto;
-    }
+  .hero-cards {
+    border: 2px solid red !important;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 150px);
+    grid-template-areas:
+      "whisper1 whisper2 whisper3"
+      "whisper1 whisper4 whisper5";
     figure:nth-of-type(1) {
-      background: url("/whiser1");
+      grid-area: whisper1;
     }
     figure:nth-of-type(2) {
-      background: url("/whiser2");
+      grid-area: whisper2;
     }
     figure:nth-of-type(3) {
-      background: url("/whiser3");
+      grid-area: whisper3;
     }
     figure:nth-of-type(4) {
-      background: url("/whiser4");
+      grid-area: whisper4;
+    }
+    figure:nth-of-type(5) {
+      grid-area: whisper5;
+    }
+    figure {
+    }
+    figure img {
+      border-radius: 0px !important;
+      width: 100%;
+      height: 100%;
     }
   }
   @media screen and (max-width: 500px) {
@@ -66,6 +95,9 @@ const Hero = styled.div`
     }
     .hero-txt span {
       font-size: inherit;
+    }
+    .hero-cards {
+      grid-template-rows: repeat(2, 100px);
     }
   }
   @media screen and (max-width: 320px) {
@@ -81,4 +113,5 @@ const Hero = styled.div`
 
 const Suggested = styled.div`
   height: 54vh;
+  border: 2px solid red !important;
 `;

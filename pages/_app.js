@@ -7,10 +7,9 @@ import {
 } from "../style/theme.config";
 function MyApp({ Component, pageProps }) {
   const theme = false;
-  console.log(Component);
   return (
     <>
-      <ThemeProvider theme={lightMixed}>
+      <ThemeProvider theme={lightTheme}>
         <GlobalStyles />
         <Component {...pageProps} />
       </ThemeProvider>

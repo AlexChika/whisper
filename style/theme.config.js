@@ -82,9 +82,11 @@ nav div ul {
 }
 nav div ul li,
 nav div span {
-  padding: 5px ;
   border-radius: 10px;
-  background-color:${({ theme }) => theme.secBg}
+  background-color:${({ theme }) => theme.secBg};
+  display:flex;
+ align-items:center;
+ justify-content:center;
 }
 
 /* Real styling */
