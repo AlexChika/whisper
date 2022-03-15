@@ -1,15 +1,16 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 
 const SingleBlog = ({ id }) => {
   let comment = true;
   return (
     <Wrap comment={comment} className="posts mb-30">
-      <meta content={""} property="og:title" />
-      <meta content={""} property="og:description" />
+      <meta content="" property="og:title" />
+      <meta content="" property="og:description" />
       <meta content="article" property="og:type" />
-      <meta content={""} property="og:url" />
-      <meta content={""} property="og:site_name" />
+      <meta content="" property="og:url" />
+      <meta content="" property="og:site_name" />
       <meta content="" itemProp="image_url" />
       <article className="post bg  mb-10">
         <h3 className="mb-20" itemProp="name">
@@ -17,19 +18,19 @@ const SingleBlog = ({ id }) => {
           C-Section in Lagos. I'm nervous but confident in God
         </h3>
         <div class="post-header">
-          <span class="post-labels mb-10">
-            <a href="/" rel="tag">
+          <span className="post-labels mb-10">
+            <Link href="/" rel="tag">
               Category
-            </a>
+            </Link>
           </span>
-          <abbr class="date-header mb-20" itemprop="datePublished">
+          <abbr className="date-header mb-20" itemprop="datePublished">
             Saturday, March 12, 2022
           </abbr>
         </div>
-        <div class="post-body" id="" itemprop="description articleBody">
-          <a className="mb-20" href="link to image">
-            <img src="/whisper5.jpeg" alt="" />
-          </a>
+        <div className="post-body" id="" itemProp="description articleBody">
+          <Link className="mb-20" href="link to image">
+            <img src="/whisper5.jpeg" alt="image" />
+          </Link>
           <p className="text mb-30">
             We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
             C-Section in Lagos. I'm nervous but confident in God. Follow my baby
@@ -41,7 +42,7 @@ const SingleBlog = ({ id }) => {
         </div>
         <div className="post-footer">
           <span className="mb-30 border">
-            <a href="">Read More</a>
+            <Link href="">Read More</Link>
           </span>
           <div className="post-share">
             <span>Share</span>
@@ -56,7 +57,7 @@ const SingleBlog = ({ id }) => {
           </div>
         </div>
       </article>
-      <article className={`comment-con border mb-30 `}>
+      <article className={`comment-con border mb-30`}>
         <h3 className={`no-comment ${comment ? "show" : ""}`}>
           <span style={{ display: "block", textAlign: "center" }}>😔😔😔</span>
           No Comments
@@ -77,37 +78,6 @@ const SingleBlog = ({ id }) => {
               <span className="comment-time">12th, tue dec 2022</span>
             </div>
           </div>
-          <div className={`mb-10 bg comment ${comment ? "show" : ""}`}>
-            <div className="comment-header bg-p">
-              <figure className="border">
-                <img src="/bird-32.png" alt="profile pic" />
-              </figure>
-              <span>name names</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-              iusto pariatur atque natus itaque quidem.
-            </p>
-            <div className="comment-footer">
-              <span className="comment-time">12th, tue dec 2022</span>
-            </div>
-          </div>
-          <div className={`mb-10 bg comment ${comment ? "show" : ""}`}>
-            <div className="comment-header bg-p">
-              <figure className="border">
-                <img src="/bird-32.png" alt="profile pic" />
-              </figure>
-              <span>name names</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-              iusto pariatur atque natus itaque quidem.
-            </p>
-            <div className="comment-footer">
-              <span className="comment-time">12th, tue dec 2022</span>
-            </div>
-          </div>
-
           <button className={` ${comment ? "show" : ""}`}>view more</button>
         </div>
         <span className="comment-count">no comments</span>
