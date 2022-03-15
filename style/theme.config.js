@@ -8,18 +8,16 @@ export const lightTheme = {
 };
 export const lightMixed = {
   priBg: "black",
-  text: "black",
+  text: "white",
   navline: "rgb(160, 160, 160)",
   secBg: "rgb(160, 160, 160)",
 };
-export const darkmixed = {};
 export const darkTheme = {
   priBg: "rgb(0, 0, 0)",
   text: "white",
   navline: "white",
   secBg: `rgba(24, 24, 24, 1)`,
 };
-
 export const GlobalStyles = createGlobalStyle`
 *,
 *::before,
@@ -28,37 +26,71 @@ export const GlobalStyles = createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
   font-family: "poppins", sans-serif;
-  font-weight: 500;
   border-radius: 10px;
+  word-wrap:break-word;
+}
+html{
+      -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 body {
+  width:100vw;
    background: ${({ theme }) => theme.priBg};
    color: ${({ theme }) => theme.text};
    font-family: sans-serif !important;
-   font-weight: 400;
+   font-weight: 300;
    font-style: normal;
+   overflow-wrap: break-word;
+    word-break: break-word;
+    word-wrap: break-word;
+   -webkit-transition: all 0.3s linear;
    transition: all 0.3s linear;
-   min-height:100vh;
-     background-attachment: fixed;
-
+   -webkit-scroll-behavior: smooth;
+   -moz-scroll-behavior: smooth;
+    -ms-scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+    -moz-scroll-behavior: smooth;
+    -ms-scroll-behavior: smooth;
 }
-figure{
-   background: url( 're' );
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background-color:${({ theme }) => theme.priBg};
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color:rgb(205, 207, 236);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(150, 154, 214);
 }
 input, button,a {
 border:none;
 outline:none;
 color:inherit;
 text-decoration:none;
-padding:10px;
-  color: inherit;
-
+color: inherit;
+cursor: pointer;
+-webkit-tap-highlight-color: transparent;
 }
 .border{
   border:${({ theme }) => `1px solid ${theme.navline}`}
 }
+.border-b{
+  border-bottom:${({ theme }) => `1px solid ${theme.navline}`}
+}
+.border-t{
+  border-top:${({ theme }) => `1px solid ${theme.navline}`}
+}
 .bg{
    background-color:${({ theme }) => theme.secBg}
+}
+.bg-p{
+   background-color:${({ theme }) => theme.priBg}
 }
 .color{
    color: ${({ theme }) => theme.text};
@@ -75,6 +107,9 @@ nav div {
   align-items: center;
  border-bottom:${({ theme }) => `2px solid ${theme.navline}`}
 }
+nav a{
+  padding:10px;
+}
 nav div ul {
   display: flex;
   flex-grow:0.4;
@@ -88,10 +123,14 @@ nav div span {
  align-items:center;
  justify-content:center;
 }
-
-/* Real styling */
 .mb-10{
   margin-bottom:10px;
+}
+.mb-20{
+  margin-bottom:20px;
+}
+.mb-30{
+  margin-bottom:30px;
 }
 /* End of Real styling */
 /* .box1::before {
