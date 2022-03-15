@@ -15,29 +15,29 @@ const SingleBlog = ({ id }) => {
       <article className="post bg  mb-10">
         <h3 className="mb-20" itemProp="name">
           We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
-          C-Section in Lagos. I'm nervous but confident in God
+          C-Section in Lagos. I&apos;m nervous but confident in God
         </h3>
-        <div class="post-header">
+        <div className="post-header">
           <span className="post-labels mb-10">
             <Link href="/" rel="tag">
               Category
             </Link>
           </span>
-          <abbr className="date-header mb-20" itemprop="datePublished">
+          <abbr className="date-header mb-20" itemProp="datePublished">
             Saturday, March 12, 2022
           </abbr>
         </div>
         <div className="post-body" id="" itemProp="description articleBody">
-          <Link className="mb-20" href="link to image">
+          <Link className="mb-20" href="/link-to-image">
             <img src="/whisper5.jpeg" alt="image" />
           </Link>
           <p className="text mb-30">
             We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
-            C-Section in Lagos. I'm nervous but confident in God. Follow my baby
-            updates by subscribing to my YouTube channel We are ready to Meet
-            Baby No. 3. Checking into hospital for my 3rd C-Section in Lagos.
-            I'm nervous but confident in God. Follow my baby updates by
-            subscribing to my YouTube channel
+            C-Section in Lagos. I&apos;m nervous but confident in God. Follow my
+            baby updates by subscribing to my YouTube channel We are ready to
+            Meet Baby No. 3. Checking into hospital for my 3rd C-Section in
+            Lagos. I&apos;m nervous but confident in God. Follow my baby updates
+            by subscribing to my YouTube channel
           </p>
         </div>
         <div className="post-footer">
