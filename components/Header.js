@@ -30,27 +30,27 @@ const Header = ({ bg }) => {
               </Link>
             </Li>
             <Li create={bg}>
-              <Link className="a" href="/create-new-blog">
+              <Link className="a" href="/create">
                 Create
               </Link>
             </Li>
-            <Li single={bg}>
-              <Link className="a" href="/individual-blog">
-                Single
+            <Li settings={bg}>
+              <Link className="a" href="/settings">
+                Settings
               </Link>
             </Li>
           </ul>
-          <span>X</span>
+          {/* <span>X</span> */}
         </div>
       </nav>
       <div></div>
     </>
   );
 };
-// style={{ background: "transparent" }}
 export default Header;
 const Li = styled.li`
   border-bottom: ${(props) => (props.create === "create" ? "2px dotted" : "")};
   border-bottom: ${(props) => (props.home === "home" ? "2px dotted" : "")};
-  border-bottom: ${(props) => (props.single === "single" ? "2px dotted" : "")};
+  border-bottom: ${(props) =>
+    props.settings === "settings" ? "2px dotted" : ""};
 `;

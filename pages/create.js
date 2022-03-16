@@ -1,10 +1,11 @@
 import Header from "../components/Header";
+import AddPost from "../components/AddPost";
 
 const Create = () => {
   return (
     <>
       <Header bg={"create"} />
-      <h1>Hello from create new</h1>
+      <AddPost />
     </>
   );
 };

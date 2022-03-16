@@ -25,31 +25,9 @@ const Blog = ({}) => {
   }, []);
   return (
     <>
-      <Hero className="mb-20 border">
-        <div className="hero-hdng-con">
-          <h1 className="hero-txt">
-            Welcome To <span>Whisper</span>{" "}
-          </h1>
-        </div>
-        <p className="hero-txt-des mb-10">Whispering to your Eyes and Ears</p>
-        <div className="hero-cards">
-          <figure className="">
-            <img src="/whisper1.jpeg" alt="" />
-          </figure>
-          <figure className="">
-            <img src="/whisper2.jpeg" alt="" />
-          </figure>
-          <figure className="">
-            <img src="/whisper3.jpeg" alt="" />
-          </figure>
-          <figure className="">
-            <img src="/whisper4.jpg" alt="" />
-          </figure>
-          <figure className="">
-            <img src="/whisper5.jpeg" alt="" />
-          </figure>
-        </div>
-      </Hero>
+      <Banner>
+        <h1>Your No1 Blog</h1>
+      </Banner>
       <h3
         className="mb-20 "
         style={{ textAlign: "center", fontStyle: "italic" }}
@@ -63,7 +41,7 @@ const Blog = ({}) => {
             return (
               <div key={index} className="sug-card-con bg">
                 <figure className="">
-                  <img src="/whisper1.jpeg" alt="" />
+                  <img src="/whisperanim.png" alt="" />
                 </figure>
                 <div className="sug-desc-con">
                   <p className="sug-title">
@@ -81,17 +59,47 @@ const Blog = ({}) => {
           })}
         </div>
       </Suggested>
-      <Main>
+      <main>
         {array.map((index) => {
           return <SingleBlog id={index} key={index} />;
         })}
-      </Main>
+      </main>
     </>
   );
 };
-// className = "";
-
 export default Blog;
+
+export const Banner = ({ children }) => {
+  return (
+    <Hero className="mb-20 border">
+      <div className="hero-hdng-con">
+        <h1 className="hero-txt">
+          Welcome To <span>Whisper</span>{" "}
+        </h1>
+      </div>
+      <p className="hero-txt-des mb-10">Whispering to your Eyes and Ears</p>
+      <div className="hero-cards">
+        <figure className="">
+          <img src="/whisper1.jpeg" alt="" />
+        </figure>
+        <figure className="">
+          <img src="/whisper2.jpeg" alt="" />
+        </figure>
+        <figure className="">
+          <img src="/whisper3.jpeg" alt="" />
+        </figure>
+        <figure className="">
+          <img src="/whisper4.jpg" alt="" />
+        </figure>
+        <figure className="">
+          <img src="/whisper5.jpeg" alt="" />
+        </figure>
+        <div className="hero-overlay">{children}</div>
+      </div>
+    </Hero>
+  );
+};
+
 const Hero = styled.div`
   overflow: hidden;
   .hero-txt,
@@ -103,7 +111,11 @@ const Hero = styled.div`
   .hero-txt-des {
     text-align: center;
   }
+  .hero-txt-des {
+    font-size: 14px;
+  }
   .hero-cards {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 150px);
@@ -133,9 +145,26 @@ const Hero = styled.div`
       height: 100%;
     }
   }
+  .hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    letter-spacing: 15px;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
   @media screen and (max-width: 768px) {
     .hero-cards {
       grid-template-rows: repeat(2, 120px);
+    }
+    .hero-overlay {
+      letter-spacing: 10px;
+      font-size: 1.5rem;
     }
   }
   @media screen and (max-width: 500px) {
@@ -147,6 +176,10 @@ const Hero = styled.div`
     }
     .hero-cards {
       grid-template-rows: repeat(2, 100px);
+    }
+    .hero-overlay {
+      letter-spacing: 5px;
+      font-size: 1rem;
     }
   }
   @media screen and (max-width: 320px) {
@@ -161,6 +194,7 @@ const Hero = styled.div`
 /* ...... */
 const Suggested = styled.div`
   position: relative;
+  padding: 5px;
   .suggested {
     height: 54vh;
     width: 100%;
@@ -210,7 +244,6 @@ const Suggested = styled.div`
     font-size: 13px;
     display: flex;
     justify-content: space-around;
-    color: skyblue;
+    color: tomato;
   }
 `;
-const Main = styled.main``;

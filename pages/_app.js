@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../style/theme.config";
 function MyApp({ Component, pageProps }) {
@@ -7,6 +8,7 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme ? lightTheme : darkTheme}>
         <GlobalStyles />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </>
   );
