@@ -121,7 +121,7 @@ const Detail = () => {
                 </span>
                 <a
                   href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                  class="twitter-share-button"
+                  className="twitter-share-button"
                   data-via="your_own_alex"
                   data-show-count="false"
                 >
