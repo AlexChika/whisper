@@ -3,27 +3,13 @@ import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
 const Detail = () => {
-  const [url, setUrl] = useState("https://whispper.vercel.app");
+  const [url, setUrl] = useState("");
   useEffect(() => {
     setUrl(window.location.href);
-    console.log(urlConvert(url));
-    console.log(window.location.href);
   });
   let comment = true;
   const urlConvert = (str) => {
     let output = encodeURIComponent(str);
-    // let strarr = Array.from(str);
-    // let output = strarr
-    //   .map((x) => {
-    //     if (x === ":") {
-    //       console.log(x);
-    //       x = "%3A";
-    //     } else if (x === "/") {
-    //       x = "%2F";
-    //     }
-    //     return x;
-    //   })
-    //   .join("");
     return output;
   };
   return (
