@@ -1,8 +1,6 @@
-## Fashion House
+## "Whisper, The Blog For All."
 
-# "Whisper, The Blog For All."
-
-check this out at [https://whispper.vercel.app/](https://whispper.vercel.app/) \
+check this out at [https://whispper.vercel.app/](https://whispper.vercel.app/)
 
 This Is a Modern Blog with CRUD suport built with Next.Js \
 A Modern Blog Implementing Create, Read, Update and Delete funtionality

@@ -21,7 +21,7 @@ const AddPost = () => {
         <h1>Whisper A Post</h1>
         <h3>Lets Hear It</h3>
       </Banner>
-      <Section>
+      <Section className="mb-30">
         <form className="bg">
           <h2 className="mb-10">Create A Post</h2>
           <div className="input-con mb-10 bg-p">

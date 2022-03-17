@@ -71,7 +71,7 @@ export default Blog;
 
 export const Banner = ({ children }) => {
   return (
-    <Hero className="mb-20 border">
+    <Hero className="mb-30 border">
       <div className="hero-hdng-con">
         <h1 className="hero-txt">
           Welcome To <span>Whisper</span>{" "}
