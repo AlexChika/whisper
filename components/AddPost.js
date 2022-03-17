@@ -55,7 +55,7 @@ const AddPost = () => {
             <label className="mb-10" htmlFor="category">
               Category
             </label>
-            <select className="mb-10" id="category">
+            <select className="mb-10 bg" id="category">
               <option selected disabled value="hey">
                 Please Select A Category
               </option>
@@ -111,14 +111,13 @@ const Section = styled.section`
       select,
       textarea {
         padding: 15px 10px;
-        border: none;
-        outline: none;
       }
       textarea {
         max-width: 100%;
         min-width: 100%;
       }
       input[type="submit"] {
+        background: #67ff61;
       }
       option {
         margin-bottom: 20px;

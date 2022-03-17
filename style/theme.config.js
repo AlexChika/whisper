@@ -68,7 +68,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(150, 154, 214);
 }
-input, button,a {
+input, button,a ,select, textarea{
 border:none;
 outline:none;
 color:inherit;
