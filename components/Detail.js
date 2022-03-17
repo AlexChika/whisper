@@ -8,7 +8,7 @@ const Detail = () => {
       <Banner>
         <p>
           WE ARE READY TO MEET BABY NO. 3. CHECKING INTO HOSPITAL FOR MY 3RD
-          C-SECTION IN LAGOS. I'M NERVOUS BUT CONFIDENT IN GOD
+          C-SECTION IN LAGOS. I&apos;M NERVOUS BUT CONFIDENT IN GOD
         </p>
       </Banner>
       <Wrap>
@@ -34,9 +34,9 @@ const Detail = () => {
             </abbr>
           </div>
           <div className="post-body" id="" itemProp="description articleBody">
-            <Link className="mb-20" href="/link-to-image">
+            <a className="mb-20" rel="noopener noreferrer" href="/image/link">
               <img src="/whisper5.jpeg" alt="image" />
-            </Link>
+            </a>
             <p className="text mb-30">
               We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
               C-Section in Lagos. I&apos;m nervous but confident in God. Follow
@@ -86,13 +86,13 @@ const Detail = () => {
               <span>Share</span>
               <div className="post-social">
                 <span className="border">
-                  <i class="bi bi-facebook"></i>
+                  <i className="bi bi-facebook"></i>
                 </span>
                 <span className="border">
-                  <i class="bi bi-instagram"></i>
+                  <i className="bi bi-instagram"></i>
                 </span>
                 <span className="border">
-                  <i class="bi bi-twitter"></i>
+                  <i className="bi bi-twitter"></i>
                 </span>
               </div>
             </div>

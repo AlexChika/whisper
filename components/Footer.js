@@ -6,22 +6,35 @@ const Footer = () => {
       <div className="bg-p mb-10 footer-head">
         <h3>Contact Me</h3>
         <div className="footer-socials">
-          <a target="_blank" href="https://github.com/AlexChika">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/AlexChika"
+          >
             <span data-tooltip="GitHub" className="bg">
               <i className="bi bi-github"></i>
             </span>
           </a>
-          <a target="_blank" href="https://www.linkedin.com/in/chika-alex/">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://www.linkedin.com/in/chika-alex/"
+          >
             <span data-tooltip="LinkedIn" className="bg">
               <i className="bi bi-linkedin"></i>
             </span>
           </a>
-          <a target="_blank" href="mailto:i.am.alex.chika@gmail.com">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="mailto:i.am.alex.chika@gmail.com"
+          >
             <span data-tooltip="i.am.alex.chika@gmail.com" className="bg">
               <i className="bi bi-envelope"></i>
             </span>
           </a>
           <a
+            rel="noopener noreferrer"
             target="_blank"
             href="https://wa.me/2349024783759?text=Hello%20Alex,%20How%20You%20Bro"
           >
@@ -29,7 +42,7 @@ const Footer = () => {
               <i className="bi bi-whatsapp"></i>
             </span>
           </a>
-          <a href="tel:+2349024783759">
+          <a rel="noopener noreferrer" href="tel:+2349024783759">
             <span data-tooltip="+2349024783759" className="bg">
               <i className="bi bi-telephone"></i>
             </span>

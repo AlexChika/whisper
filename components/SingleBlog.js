@@ -27,9 +27,14 @@ const SingleBlog = ({ id }) => {
           </abbr>
         </div>
         <div className="post-body" id="" itemProp="description articleBody">
-          <Link className="mb-20" href="/link-to-image">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            className="mb-20"
+            href="/link-to-image"
+          >
             <img src="/whisper5.jpeg" alt="image" />
-          </Link>
+          </a>
           <p className="text mb-30">
             We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
             C-Section in Lagos. I&apos;m nervous but confident in God. Follow my

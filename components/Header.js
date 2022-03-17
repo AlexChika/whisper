@@ -13,7 +13,7 @@ const Header = ({ bg }) => {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
         />
-        <title>Whisper | The Everyone's Blog</title>
+        <title>Whisper | The Everyone&apos;s Blog</title>
       </Head>
       <nav className="nav mb-10">
         <div>
