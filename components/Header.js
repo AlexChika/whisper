@@ -13,6 +13,11 @@ const Header = ({ bg }) => {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
         />
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charset="utf-8"
+        ></script>
         <title>Whisper | The Everyone&apos;s Blog</title>
       </Head>
       <nav className="nav mb-10">

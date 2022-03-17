@@ -1,8 +1,31 @@
+import { useState, useEffect } from "react";
 import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
 const Detail = () => {
+  const [url, setUrl] = useState("https://whispper.vercel.app");
+  useEffect(() => {
+    setUrl(window.location.href);
+    console.log(urlConvert(url));
+    console.log(window.location.href);
+  });
   let comment = true;
+  const urlConvert = (str) => {
+    let output = encodeURIComponent(str);
+    // let strarr = Array.from(str);
+    // let output = strarr
+    //   .map((x) => {
+    //     if (x === ":") {
+    //       console.log(x);
+    //       x = "%3A";
+    //     } else if (x === "/") {
+    //       x = "%2F";
+    //     }
+    //     return x;
+    //   })
+    //   .join("");
+    return output;
+  };
   return (
     <>
       <Banner>
@@ -96,9 +119,29 @@ const Detail = () => {
                 <span className="border">
                   <i className="bi bi-instagram"></i>
                 </span>
-                <span className="border">
+                <a
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                  class="twitter-share-button"
+                  data-via="your_own_alex"
+                  data-show-count="false"
+                >
+                  Tweet
+                </a>
+                <iframe
+                  src={`https://www.facebook.com/plugins/share_button.php?href=${urlConvert(
+                    url
+                  )}&layout=button_count&size=small&width=96&height=20&appId`}
+                  width="96"
+                  height="20"
+                  style={{ border: "none", overflow: "hidden" }}
+                  scrolling="no"
+                  frameBorder="0"
+                  allowFullScreen="true"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                ></iframe>
+                {/* <span className="border">
                   <i className="bi bi-twitter"></i>
-                </span>
+                </span> */}
               </div>
             </div>
           </div>
@@ -148,6 +191,7 @@ const Detail = () => {
     </>
   );
 };
+
 export default Detail;
 const Wrap = styled.section`
   margin: 0 auto;
@@ -243,8 +287,8 @@ const Wrap = styled.section`
       margin: 0 auto;
     }
     .post-share .post-social span {
-      height: 40px;
-      width: 40px;
+      height: 40px !important;
+      width: 40px !important;
       margin: 0 3px;
       border-radius: 50px;
       margin-top: 10px;

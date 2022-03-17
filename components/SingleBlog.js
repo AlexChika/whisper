@@ -51,11 +51,15 @@ const SingleBlog = ({ id }) => {
           <div className="post-share">
             <span>Share</span>
             <div className="post-social">
-              <span className="border">F</span>
-              <span className="border">t</span>
-              <span className="border">tg</span>
-              <span className="border">m</span>
-              <span className="border">i</span>
+              <span className="border">
+                <i className="bi bi-facebook"></i>
+              </span>
+              <span className="border">
+                <i className="bi bi-instagram"></i>
+              </span>
+              <span className="border">
+                <i className="bi bi-twitter"></i>
+              </span>
             </div>
             <button>Leave a comment</button>
           </div>
@@ -143,20 +147,27 @@ const Wrap = styled.section`
       font-size: 20px;
     }
     .post-share .post-social {
+      /* width: 260px; */
       display: flex;
-      width: 260px;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto;
-      justify-content: space-around;
     }
     .post-share .post-social span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 40px;
       width: 40px;
+      margin: 0 3px;
       border-radius: 50px;
       margin-top: 10px;
       margin-bottom: 20px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50px;
+      i {
+        font-size: 20px;
+      }
     }
     .post-share button {
       text-align: center;
