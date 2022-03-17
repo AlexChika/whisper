@@ -19,6 +19,7 @@ const Header = ({ bg }) => {
           charset="utf-8"
         ></script>
         <script
+          async
           src="https://platform.linkedin.com/in.js"
           type="text/javascript"
         ></script>
