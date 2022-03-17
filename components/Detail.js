@@ -34,7 +34,12 @@ const Detail = () => {
             </abbr>
           </div>
           <div className="post-body" id="" itemProp="description articleBody">
-            <a className="mb-20" rel="noopener noreferrer" href="/image/link">
+            <a
+              target="_blank"
+              className="mb-20"
+              rel="noopener noreferrer"
+              href="http://somewhere.com"
+            >
               <img src="/whisper5.jpeg" alt="image" />
             </a>
             <p className="text mb-30">

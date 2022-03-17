@@ -54,7 +54,11 @@ const Footer = () => {
         <p>&copy; Alex Chika 2022 All Rights Reserved</p>
         <small> Check me out @</small> <br />
         <small>
-          <a target="_blank" href="https://i-am-alex.netlify.app/">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://i-am-alex.netlify.app/"
+          >
             https://i-am-alex.netlify.app/
           </a>
         </small>
