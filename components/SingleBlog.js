@@ -1,8 +1,17 @@
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 
 const SingleBlog = ({ id }) => {
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    setUrl(window.location.href);
+  });
   let comment = true;
+  const urlConvert = (str) => {
+    let output = encodeURIComponent(str);
+    return output;
+  };
   return (
     <Wrap comment={comment} className="posts mb-30">
       <meta content="" property="og:title" />
@@ -51,15 +60,31 @@ const SingleBlog = ({ id }) => {
           <div className="post-share">
             <span>Share</span>
             <div className="post-social">
-              <span className="border">
-                <i className="bi bi-facebook"></i>
-              </span>
-              <span className="border">
-                <i className="bi bi-instagram"></i>
-              </span>
-              <span className="border">
-                <i className="bi bi-twitter"></i>
-              </span>
+              <script
+                src="https://platform.linkedin.com/in.js"
+                type="text/javascript"
+              ></script>
+              <script type="In/Share" data-url={url}></script>
+              <a
+                href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                className="twitter-share-button"
+                data-via="your_own_alex"
+                data-show-count="false"
+              >
+                Tweet
+              </a>
+              <iframe
+                src={`https://www.facebook.com/plugins/share_button.php?href=${urlConvert(
+                  url
+                )}&layout=button_count&size=small&width=96&height=20&appId`}
+                width="96"
+                height="20"
+                style={{ border: "none", overflow: "hidden" }}
+                scrolling="no"
+                frameBorder="0"
+                allowFullScreen={true}
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              ></iframe>
             </div>
             <button>Leave a comment</button>
           </div>
@@ -147,27 +172,17 @@ const Wrap = styled.section`
       font-size: 20px;
     }
     .post-share .post-social {
-      /* width: 260px; */
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto;
     }
-    .post-share .post-social span {
-      height: 40px;
-      width: 40px;
+    .post-share .post-social * {
       margin: 0 3px;
-      border-radius: 50px;
       margin-top: 10px;
       margin-bottom: 20px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50px;
-      i {
-        font-size: 20px;
-      }
+      color: white !important;
+      border-radius: 10px !important;
     }
     .post-share button {
       text-align: center;

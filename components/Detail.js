@@ -99,12 +99,11 @@ const Detail = () => {
               </div>
               <span>Share</span>
               <div className="post-social">
-                <span className="border">
-                  <i className="bi bi-facebook"></i>
-                </span>
-                <span className="border">
-                  <i className="bi bi-instagram"></i>
-                </span>
+                <script
+                  src="https://platform.linkedin.com/in.js"
+                  type="text/javascript"
+                ></script>
+                <script type="In/Share" data-url={url}></script>
                 <a
                   href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                   className="twitter-share-button"
@@ -122,12 +121,9 @@ const Detail = () => {
                   style={{ border: "none", overflow: "hidden" }}
                   scrolling="no"
                   frameBorder="0"
-                  allowFullScreen="true"
+                  allowFullScreen={true}
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                 ></iframe>
-                {/* <span className="border">
-                  <i className="bi bi-twitter"></i>
-                </span> */}
               </div>
             </div>
           </div>
@@ -177,6 +173,12 @@ const Detail = () => {
     </>
   );
 };
+// <span className="border">
+//   <i className="bi bi-facebook"></i>
+// </span>
+// <span className="border">
+//   <i className="bi bi-instagram"></i>
+// </span>
 
 export default Detail;
 const Wrap = styled.section`
@@ -272,21 +274,12 @@ const Wrap = styled.section`
       justify-content: center;
       margin: 0 auto;
     }
-    .post-share .post-social span {
-      height: 40px !important;
-      width: 40px !important;
+    .post-share .post-social * {
       margin: 0 3px;
-      border-radius: 50px;
       margin-top: 10px;
       margin-bottom: 20px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50px;
-      i {
-        font-size: 20px;
-      }
+      color: white !important;
+      border-radius: 10px !important;
     }
   }
   /* ..........second article........... */
