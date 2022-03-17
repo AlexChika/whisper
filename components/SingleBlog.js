@@ -60,10 +60,6 @@ const SingleBlog = ({ id }) => {
           <div className="post-share">
             <span>Share</span>
             <div className="post-social">
-              <script
-                src="https://platform.linkedin.com/in.js"
-                type="text/javascript"
-              ></script>
               <script type="In/Share" data-url={url}></script>
               <a
                 href="https://twitter.com/share?ref_src=twsrc%5Etfw"

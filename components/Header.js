@@ -18,6 +18,10 @@ const Header = ({ bg }) => {
           src="https://platform.twitter.com/widgets.js"
           charset="utf-8"
         ></script>
+        <script
+          src="https://platform.linkedin.com/in.js"
+          type="text/javascript"
+        ></script>
         <title>Whisper | The Everyone&apos;s Blog</title>
       </Head>
       <nav className="nav mb-10">
