@@ -153,6 +153,7 @@ const Hero = styled.div`
     left: 0;
     top: 0;
     display: grid;
+    text-align: center;
     place-items: center;
     letter-spacing: 15px;
     font-size: 2rem;

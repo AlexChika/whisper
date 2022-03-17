@@ -94,7 +94,6 @@ const AddPost = () => {
 
 export default AddPost;
 const Section = styled.section`
-  margin: 0 auto;
   form {
     margin: 0 auto;
     padding: 30px;

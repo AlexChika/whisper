@@ -132,17 +132,6 @@ nav div span {
 .mb-30{
   margin-bottom:30px;
 }
-/* End of Real styling */
-/* .box1::before {
-  content: "";
-  position: absolute;
-  border: 2px solid gray;
-  width: 100%;
-  height: 100%;
-  left: -20px;
-  top: 20px;
-  z-index: -1;
-} */
 @media screen and (max-width: 500px) {
   nav div ul li,
 nav div span {

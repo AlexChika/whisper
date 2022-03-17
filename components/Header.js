@@ -9,7 +9,11 @@ const Header = ({ bg }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="My First Time With Next Js" />
         <link rel="icon" sizes="60x60" type="image/png" href="/bird.png" />
-        <title>Learning Next.Js</title>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+        />
+        <title>Whisper | The Everyone's Blog</title>
       </Head>
       <nav className="nav mb-10">
         <div>
