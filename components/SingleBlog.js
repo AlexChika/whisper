@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import styled from "styled-components";
 
 const SingleBlog = ({ id }) => {
@@ -55,20 +56,24 @@ const SingleBlog = ({ id }) => {
         </div>
         <div className="post-footer">
           <span className="mb-30 border">
-            <Link href="">Read More</Link>
+            <Link href="/detail">Read More</Link>
           </span>
           <div className="post-share">
             <span>Share</span>
             <div className="post-social">
-              <script type="In/Share" data-url={url}></script>
               <a
                 href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                 className="twitter-share-button"
-                data-via="your_own_alex"
                 data-show-count="false"
               >
                 Tweet
               </a>
+              <Script
+                async
+                src="https://platform.twitter.com/widgets.js"
+                charset="utf-8"
+                strategy="beforeInteractive"
+              ></Script>
               <iframe
                 src={`https://www.facebook.com/plugins/share_button.php?href=${urlConvert(
                   url
@@ -81,6 +86,12 @@ const SingleBlog = ({ id }) => {
                 allowFullScreen={true}
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               ></iframe>
+              {/* <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+                target="_blank"
+              >
+                Share on Facebook
+              </a> */}
             </div>
             <button>Leave a comment</button>
           </div>
@@ -177,7 +188,7 @@ const Wrap = styled.section`
       margin: 0 3px;
       margin-top: 10px;
       margin-bottom: 20px;
-      color: white !important;
+      color: red !important;
       border-radius: 10px !important;
     }
     .post-share button {

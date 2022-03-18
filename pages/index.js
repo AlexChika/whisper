@@ -1,3 +1,4 @@
+// import { useEffect } from "react";
 import BlogHome from "../components/BlogHome";
 import Header from "../components/Header";
 export default function Home() {

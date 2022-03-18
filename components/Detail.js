@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Script from "next/script";
 import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
@@ -99,22 +100,29 @@ const Detail = () => {
               </div>
               <span>Share</span>
               <div className="post-social">
-                <script type="In/Share" data-url={url}></script>
                 <a
                   href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                   className="twitter-share-button"
-                  data-via="your_own_alex"
                   data-show-count="false"
                 >
                   Tweet
                 </a>
+                <Script
+                  async
+                  src="https://platform.twitter.com/widgets.js"
+                  charset="utf-8"
+                  strategy="beforeInteractive"
+                ></Script>
                 <iframe
                   src={`https://www.facebook.com/plugins/share_button.php?href=${urlConvert(
                     url
                   )}&layout=button_count&size=small&width=96&height=20&appId`}
                   width="96"
                   height="20"
-                  style={{ border: "none", overflow: "hidden" }}
+                  style={{
+                    border: "none",
+                    overflow: "hidden",
+                  }}
                   scrolling="no"
                   frameBorder="0"
                   allowFullScreen={true}
@@ -274,8 +282,8 @@ const Wrap = styled.section`
       margin: 0 3px;
       margin-top: 10px;
       margin-bottom: 20px;
-      color: white !important;
-      border-radius: 10px !important;
+      /* color: white !important; */
+      /* border-radius: 10px !important; */
     }
   }
   /* ..........second article........... */
