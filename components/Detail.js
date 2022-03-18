@@ -8,11 +8,11 @@ const Detail = () => {
   useEffect(() => {
     setUrl(window.location.href);
   });
-  let comment = true;
-  const urlConvert = (str) => {
-    let output = encodeURIComponent(str);
+  function urlConvert(str) {
+    let output = decodeURIComponent(str);
     return output;
-  };
+  }
+  let comment = true;
   return (
     <>
       <Banner>
@@ -101,33 +101,15 @@ const Detail = () => {
               <span>Share</span>
               <div className="post-social">
                 <a
-                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                  className="twitter-share-button"
-                  data-show-count="false"
+                  href="https://www.facebook.com/sharer/sharer.php?u=https://whispper.vercel.app/detail/"
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  Tweet
+                  {" "}
+                  <span className="border">
+                    <i className="bi bi-facebook"></i>
+                  </span>
                 </a>
-                <Script
-                  async
-                  src="https://platform.twitter.com/widgets.js"
-                  charset="utf-8"
-                  strategy="beforeInteractive"
-                ></Script>
-                <iframe
-                  src={`https://www.facebook.com/plugins/share_button.php?href=${urlConvert(
-                    url
-                  )}&layout=button_count&size=small&width=96&height=20&appId`}
-                  width="96"
-                  height="20"
-                  style={{
-                    border: "none",
-                    overflow: "hidden",
-                  }}
-                  scrolling="no"
-                  frameBorder="0"
-                  allowFullScreen={true}
-                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                ></iframe>
               </div>
             </div>
           </div>
@@ -278,12 +260,19 @@ const Wrap = styled.section`
       justify-content: center;
       margin: 0 auto;
     }
-    .post-share .post-social * {
+    .post-share .post-social span {
       margin: 0 3px;
       margin-top: 10px;
-      margin-bottom: 20px;
-      /* color: white !important; */
-      /* border-radius: 10px !important; */
+      color: blue !important;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    i {
+      font-size: 25px;
     }
   }
   /* ..........second article........... */
