@@ -28,7 +28,7 @@ export default function Home(props) {
 // }
 export async function getStaticProps() {
   // fetch data from wherever
-  const response = await fetch(`${server}/api/blog`);
+  const response = await fetch(`/api/blog`);
   const result = await response.json();
   console.log(result.posts);
   let array = [1, 2, 3, 4, 5];
