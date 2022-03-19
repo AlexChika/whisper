@@ -1,9 +1,18 @@
-import { server } from "../config/index";
-// import { MongoClient } from "mongodb";
-import { useEffect } from "react";
+import { MongoClient } from "mongodb";
+// import { useEffect, useState } from "react";
+// import { server } from "../config/index";
 import BlogHome from "../components/BlogHome";
 import Header from "../components/Header";
 export default function Home(props) {
+  // const [posts, setPosts] = useState([]);
+  // async function getBlogPosts() {
+  //   const response = await fetch("/api/blog");
+  //   const result = await response.json();
+  //   setPosts(result.posts);
+  // }
+  // useEffect(() => {
+  //   getBlogPosts();
+  // }, []);
   return (
     <>
       <Header bg={"home"} />
@@ -11,10 +20,6 @@ export default function Home(props) {
     </>
   );
 }
-// const response = await fetch(`${server}/api/blog`);
-// const result = await response.json();
-// console.log(result.posts);
-// getPost();
 // export async function getServerSideProps(context) {
 //   // fetch data from wherever
 //   const req = context.req
@@ -28,13 +33,17 @@ export default function Home(props) {
 // }
 export async function getStaticProps() {
   // fetch data from wherever
-  const response = await fetch(`/api/blog`);
-  const result = await response.json();
-  console.log(result.posts);
-  let array = [1, 2, 3, 4, 5];
+  // FACED AN ABSOLUTE URL PROBLEM
+  const connectString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.a1mvy.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
+  console.log(process.env.mongodb_username);
+  const client = await MongoClient.connect(connectString);
+  const db = client.db();
+  const blogPostsCollection = db.collection("posts");
+  const blogPosts = await blogPostsCollection.find().toArray();
+  console.log(blogPosts);
   return {
     props: {
-      blogPost: result.posts.map((post) => ({
+      blogPost: blogPosts.map((post) => ({
         name: post.name,
         title: post.title,
         url: post.url,
