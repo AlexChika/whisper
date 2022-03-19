@@ -1,8 +1,7 @@
 import SingleBlog from "./SingleBlog";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-let array = [1, 2, 3, 4, 5, 6, 7, 8];
-const Blog = ({}) => {
+const Blog = ({ blogPost }) => {
   useEffect(() => {
     document.addEventListener("contextmenu", function (e) {
       // e.preventDefault();
@@ -37,7 +36,7 @@ const Blog = ({}) => {
       <Suggested className="mb-30 border">
         <button className="bg color">see more..</button>
         <div className="suggested">
-          {array.map((index) => {
+          {blogPost.map((index) => {
             return (
               <div key={index} className="sug-card-con bg">
                 <figure className="">
@@ -60,7 +59,7 @@ const Blog = ({}) => {
         </div>
       </Suggested>
       <main>
-        {array.map((index) => {
+        {blogPost.map((index) => {
           return <SingleBlog id={index} key={index} />;
         })}
       </main>

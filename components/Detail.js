@@ -1,5 +1,18 @@
 import { useState, useEffect } from "react";
-import Script from "next/script";
+import {
+  TwitterIcon,
+  TwitterShareButton,
+  FacebookShareButton,
+  FacebookIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  RedditShareButton,
+  RedditIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from "next-share";
 import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
@@ -100,16 +113,32 @@ const Detail = () => {
               </div>
               <span>Share</span>
               <div className="post-social">
-                <a
-                  href="https://www.facebook.com/sharer/sharer.php?u=https://whispper.vercel.app/detail/"
-                  target="_blank"
-                  rel="noreferrer"
+                <FacebookShareButton
+                  url={"https://whispper.vercel.app/detail/"}
                 >
-                  {" "}
-                  <span className="border">
-                    <i className="bi bi-facebook"></i>
-                  </span>
-                </a>
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+                <PinterestShareButton
+                  url={"https://whispper.vercel.app/detail/"}
+                >
+                  <PinterestIcon size={32} round />
+                </PinterestShareButton>
+                <RedditShareButton url={"https://whispper.vercel.app/detail/"}>
+                  <RedditIcon size={32} round />
+                </RedditShareButton>
+                <WhatsappShareButton
+                  url={"https://whispper.vercel.app/detail/"}
+                >
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
+                <LinkedinShareButton
+                  url={"https://whispper.vercel.app/detail/"}
+                >
+                  <LinkedinIcon size={32} round />
+                </LinkedinShareButton>
+                <TwitterShareButton url={"https://whispper.vercel.app/detail/"}>
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
               </div>
             </div>
           </div>
@@ -233,7 +262,7 @@ const Wrap = styled.section`
       input,
       button {
         margin: 0 3px;
-        padding: 15px 10px;
+        padding: 15px 0;
         border-radius: 20px;
       }
       input[type="submit"] {
@@ -244,6 +273,7 @@ const Wrap = styled.section`
         flex: 0.25;
         background: none;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
       }
@@ -260,19 +290,9 @@ const Wrap = styled.section`
       justify-content: center;
       margin: 0 auto;
     }
-    .post-share .post-social span {
+    .post-share .post-social * {
       margin: 0 3px;
       margin-top: 10px;
-      color: blue !important;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    i {
-      font-size: 25px;
     }
   }
   /* ..........second article........... */

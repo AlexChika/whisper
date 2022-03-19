@@ -1,7 +1,15 @@
-// import { useEffect,useState, useReducer } from "react";
+import { useEffect, useState, useReducer } from "react";
 import styled from "styled-components";
 import { Banner } from "../components/BlogHome";
-const AddPost = () => {
+const AddPost = ({ add }) => {
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    add();
+  };
+  useEffect(() => {
+    // add();
+  });
+  // add();
   const error = () => {
     return {
       color: "red",
@@ -22,7 +30,7 @@ const AddPost = () => {
         <h3>Lets Hear It</h3>
       </Banner>
       <Section className="mb-30">
-        <form className="bg">
+        <form onSubmit={onSubmitHandler} className="bg">
           <h2 className="mb-10">Create A Post</h2>
           <div className="input-con mb-10 bg-p">
             <label className="mb-10" htmlFor="title">
@@ -56,9 +64,7 @@ const AddPost = () => {
               Category
             </label>
             <select className="mb-10 bg" id="category">
-              <option selected disabled value="hey">
-                Please Select A Category
-              </option>
+              <option disabled>Please Select A Category</option>
               <option value="hello">Health</option>
               <option value="hello">Tech</option>
               <option value="hello">Celeb</option>

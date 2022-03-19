@@ -3,7 +3,7 @@
 check this out at [https://whispper.vercel.app/](https://whispper.vercel.app/)
 
 This Is a Modern Blog with CRUD suport built with Next.Js \
-A Modern Blog Implementing Create, Read, Update and Delete funtionality
+A FullStack Modern Blog Implementing Create, Read, Update and Delete funtionality
 
 ### `Feauturing`
 
@@ -16,4 +16,4 @@ A Modern Blog Implementing Create, Read, Update and Delete funtionality
 
 built with Next.Js \
 Styled Components \
-and Graph CMS
+and MongoDb as database \

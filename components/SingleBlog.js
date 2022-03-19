@@ -1,18 +1,33 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Script from "next/script";
+// import useRouter from "next/router";
 import styled from "styled-components";
+import {
+  TwitterIcon,
+  TwitterShareButton,
+  FacebookShareButton,
+  FacebookIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  RedditShareButton,
+  RedditIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from "next-share";
 
 const SingleBlog = ({ id }) => {
+  // const router = useRouter()
+  // const navigate =(linkid)=>{
+  //   router.push('/' + linkid)
+  // }
   const [url, setUrl] = useState("");
   useEffect(() => {
     setUrl(window.location.href);
+    // document.title = ""
   });
   let comment = true;
-  const urlConvert = (str) => {
-    let output = encodeURIComponent(str);
-    return output;
-  };
   return (
     <Wrap comment={comment} className="posts mb-30">
       <meta content="" property="og:title" />
@@ -61,16 +76,24 @@ const SingleBlog = ({ id }) => {
           <div className="post-share">
             <span>Share</span>
             <div className="post-social">
-              <a
-                href="https://www.facebook.com/sharer/sharer.php?u=https://whispper.vercel.app/detail/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <span className="border">
-                  <i className="bi bi-facebook"></i>
-                </span>
-              </a>
+              <FacebookShareButton url={"https://whispper.vercel.app/detail/"}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <PinterestShareButton url={"https://whispper.vercel.app/detail/"}>
+                <PinterestIcon size={32} round />
+              </PinterestShareButton>
+              <RedditShareButton url={"https://whispper.vercel.app/detail/"}>
+                <RedditIcon size={32} round />
+              </RedditShareButton>
+              <WhatsappShareButton url={"https://whispper.vercel.app/detail/"}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+              <LinkedinShareButton url={"https://whispper.vercel.app/detail/"}>
+                <LinkedinIcon size={32} round />
+              </LinkedinShareButton>
+              <TwitterShareButton url={"https://whispper.vercel.app/detail/"}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
             </div>
             <button>Leave a comment</button>
           </div>
@@ -156,6 +179,7 @@ const Wrap = styled.section`
       margin-top: 40px;
       text-transform: uppercase;
       font-size: 20px;
+      font-style: italic;
     }
     .post-share .post-social {
       display: flex;
@@ -163,19 +187,10 @@ const Wrap = styled.section`
       justify-content: center;
       margin: 0 auto;
     }
-    .post-share .post-social span {
+    .post-share .post-social * {
       margin: 0 3px;
       margin-top: 10px;
-      color: blue !important;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      i {
-        font-size: 25px;
-      }
+      margin-bottom: 10px;
     }
     .post-share button {
       text-align: center;
