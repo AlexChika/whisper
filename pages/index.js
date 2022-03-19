@@ -34,7 +34,15 @@ export async function getStaticProps() {
   let array = [1, 2, 3, 4, 5];
   return {
     props: {
-      blogPost: result.posts,
+      blogPost: result.posts.map((post) => ({
+        name: post.name,
+        title: post.title,
+        url: post.url,
+        category: post.category,
+        story: post.story,
+        date: post.date,
+        id: post._id.toString(),
+      })),
     },
     revalidate: 60,
   };

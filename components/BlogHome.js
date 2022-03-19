@@ -58,8 +58,8 @@ const Blog = ({ blogPost }) => {
         </div>
       </Suggested>
       <main>
-        {blogPost.map((index) => {
-          return <SingleBlog id={index} key={index} />;
+        {blogPost.map((post) => {
+          return <SingleBlog post={post} key={post.id} />;
         })}
       </main>
     </>

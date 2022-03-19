@@ -17,16 +17,13 @@ import {
   LinkedinIcon,
 } from "next-share";
 
-const SingleBlog = ({ id }) => {
+const SingleBlog = ({ post }) => {
+  const { id, name, title, url, category, story, date } = post;
   // const router = useRouter()
   // const navigate =(linkid)=>{
   //   router.push('/' + linkid)
   // }
-  const [url, setUrl] = useState("");
-  useEffect(() => {
-    setUrl(window.location.href);
-    // document.title = ""
-  });
+
   let comment = true;
   return (
     <Wrap comment={comment} className="posts mb-30">
@@ -38,17 +35,16 @@ const SingleBlog = ({ id }) => {
       <meta content="" itemProp="image_url" />
       <article className="post bg  mb-10">
         <h3 className="mb-20" itemProp="name">
-          We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
-          C-Section in Lagos. I&apos;m nervous but confident in God
+          {title}
         </h3>
         <div className="post-header">
           <span className="post-labels mb-10">
             <Link href="/" rel="tag">
-              Category
+              {category}
             </Link>
           </span>
           <abbr className="date-header mb-20" itemProp="datePublished">
-            Saturday, March 12, 2022
+            {date}
           </abbr>
         </div>
         <div className="post-body" id="" itemProp="description articleBody">
@@ -58,16 +54,9 @@ const SingleBlog = ({ id }) => {
             className="mb-20"
             href="/link-to-image"
           >
-            <img src="/whisper5.jpeg" alt="image" />
+            <img src={url} alt={title} />
           </a>
-          <p className="text mb-30">
-            We are ready to Meet Baby No. 3. Checking into hospital for my 3rd
-            C-Section in Lagos. I&apos;m nervous but confident in God. Follow my
-            baby updates by subscribing to my YouTube channel We are ready to
-            Meet Baby No. 3. Checking into hospital for my 3rd C-Section in
-            Lagos. I&apos;m nervous but confident in God. Follow my baby updates
-            by subscribing to my YouTube channel
-          </p>
+          <p className="text mb-30">{story}</p>
         </div>
         <div className="post-footer">
           <span className="mb-30 border">
@@ -97,6 +86,7 @@ const SingleBlog = ({ id }) => {
             </div>
             <button>Leave a comment</button>
           </div>
+          <p className="poster">{name}</p>
         </div>
       </article>
       <article className={`comment-con border mb-30`}>
@@ -202,6 +192,12 @@ const Wrap = styled.section`
     .post-share button:active,
     .post-share button:focus {
       color: blue;
+    }
+    .poster {
+      font-size: 13px;
+      opacity: 0.5;
+      text-align: center;
+      margin-top: 10px;
     }
   }
   .comment-con {
