@@ -5,10 +5,10 @@ async function handler(req, res) {
     const client = await MongoClient.connect(connectString);
     const db = client.db();
     const blogPostsCollection = db.collection("posts");
-    const blogPosts = blogPostsCollection.find().toArray();
+    const blogPosts = await blogPostsCollection.find().toArray();
     console.log(blogPosts);
     client.close();
-    res.status(201).json({ posts: [1, 2, 3, 4, 5, 6, 7, 8] });
+    res.status(201).json({ posts: blogPosts });
   }
 }
 export default handler;

@@ -1,5 +1,6 @@
 import { server } from "../config/index";
-// import { useEffect } from "react";
+// import { MongoClient } from "mongodb";
+import { useEffect } from "react";
 import BlogHome from "../components/BlogHome";
 import Header from "../components/Header";
 export default function Home(props) {
@@ -10,6 +11,9 @@ export default function Home(props) {
     </>
   );
 }
+// const response = await fetch(`${server}/api/blog`);
+// const result = await response.json();
+// console.log(result.posts);
 // getPost();
 // export async function getServerSideProps(context) {
 //   // fetch data from wherever

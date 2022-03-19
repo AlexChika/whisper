@@ -7,7 +7,6 @@ const Blog = ({ blogPost }) => {
       // e.preventDefault();
     });
     document.onkeydown = function (e) {
-      console.log(e);
       if (e.keyCode == 123) {
         return false;
       }
