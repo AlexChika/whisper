@@ -35,9 +35,9 @@ const Blog = ({ blogPost }) => {
       <Suggested className="mb-30 border">
         <button className="bg color">see more..</button>
         <div className="suggested">
-          {blogPost.map((index) => {
+          {blogPost.map((post) => {
             return (
-              <div key={index} className="sug-card-con bg">
+              <div key={post.id} className="sug-card-con bg">
                 <figure className="">
                   <img src="/whisperanim.png" alt="" />
                 </figure>
@@ -59,6 +59,7 @@ const Blog = ({ blogPost }) => {
       </Suggested>
       <main>
         {blogPost.map((post) => {
+          console.log(post.id);
           return <SingleBlog post={post} key={post.id} />;
         })}
       </main>

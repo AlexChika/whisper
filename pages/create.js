@@ -5,18 +5,30 @@ import AddPost from "../components/AddPost";
 const Create = () => {
   const router = useRouter();
   async function add(post) {
-    const response = await fetch("/api/createblog", {
-      method: "POST",
-      body: JSON.stringify(post),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const result = await response.json();
-    console.log(result);
-    console.log("i ran");
-    // if(){}
-    // router.push('')
+    try {
+      const response = await fetch("/api/createblog", {
+        method: "POST",
+        body: JSON.stringify(post),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status < 300 && response.status > 180) {
+        console.log("successfull");
+        let result = await response.json();
+        if (result.message === "Successfully stored message!") {
+          return [true];
+        }
+      } else {
+        let result = await response.json();
+        if (result.message !== "Successfully stored message!") {
+          console.log("failed");
+          return [false];
+        }
+      }
+    } catch (e) {
+      return [false];
+    }
   }
   return (
     <>

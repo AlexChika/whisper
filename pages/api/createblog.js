@@ -3,12 +3,6 @@ import { MongoClient } from "mongodb";
 async function handler(req, res) {
   if (req.method === "POST") {
     const post = req.body;
-    console.log(
-      process.env.mongodb_username,
-      process.env.mongodb_password,
-      process.env.mongodb_clustername,
-      process.env.mongodb_database
-    );
     let postId;
     let client;
     const connectString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.a1mvy.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
@@ -21,8 +15,8 @@ async function handler(req, res) {
     const db = client.db();
     try {
       const collections = db.collection("posts");
-      const result = await collections.insertOne(post);
-      postId = result.insertedId;
+      // const result = await collections.insertOne(post);
+      // postId = result.insertedId;
     } catch (error) {
       client.close();
       res.status(500).json({ message: "Storing message failed!" });

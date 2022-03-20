@@ -6,7 +6,6 @@ async function handler(req, res) {
     const db = client.db();
     const blogPostsCollection = db.collection("posts");
     const blogPosts = await blogPostsCollection.find().toArray();
-    console.log(blogPosts);
     client.close();
     res.status(201).json({ posts: blogPosts });
   }

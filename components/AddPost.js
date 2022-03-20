@@ -1,5 +1,6 @@
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+import { ThreeDots } from "react-loader-spinner";
 import { Banner } from "../components/BlogHome";
 let pass = {
   names: false,
@@ -9,6 +10,7 @@ let pass = {
   story: false,
 };
 const AddPost = ({ add }) => {
+  const errormessage = useRef(null);
   const [inputs, setInputs] = useState({
     name: "",
     title: "",
@@ -71,10 +73,10 @@ const AddPost = ({ add }) => {
       }
     }
     if (name === "story") {
-      if (value.length < 150) {
+      if (value.length < 200) {
         e.target.nextElementSibling.style.color = "red";
         e.target.nextElementSibling.textContent =
-          "Story Must Be Atleast 150 characters";
+          "Story Must Be Atleast 200 characters";
         pass = { ...pass, story: false };
       } else {
         e.target.nextElementSibling.style.color = "";
@@ -132,48 +134,55 @@ const AddPost = ({ add }) => {
       months[cal.getMonth()]
     } ${hour}:${cal.getMinutes()}${am}`;
   }
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const { name, title, url, category, story, passed } = inputs;
+    const { passed } = inputs;
     if (!passed || passed === false) {
       e.target.classList.add("show");
+      errormessage.current.textContent = "Please Fill Spaces Correctly";
     } else {
       let newPost = { ...inputs, date: getdate() };
-      console.log(newPost);
-      add(newPost);
-      // setInputs({
-      //   name: "",
-      //   title: "",
-      //   url: "",
-      //   category: "Please Select A Category",
-      //   story: "",
-      // });
-      // pass = {
-      //   names: false,
-      //   title: false,
-      //   url: false,
-      //   category: false,
-      //   story: false,
-      // };
-      // e.target.querySelector("input[type=submit]").style.backgroundColor =
-      //   "gray";
+      e.target.classList.remove("show");
+      e.target.classList.add("load");
+      e.target.querySelector("input[type=submit]").value = "Please Wait";
+      e.target.querySelector("input[type=submit]").style.backgroundColor =
+        "#fded5f";
+      let [status] = await add(newPost);
+      if (status) {
+        e.target.classList.remove("load");
+        e.target.querySelector("input[type=submit]").value = "Successful";
+        e.target.querySelector("input[type=submit]").style.backgroundColor =
+          "#67ff61";
+        pass = {
+          names: false,
+          title: false,
+          url: false,
+          category: false,
+          story: false,
+        };
+        setTimeout(() => {
+          setInputs({
+            name: "",
+            title: "",
+            url: "",
+            category: "Please Select A Category",
+            story: "",
+          });
+          e.target.querySelector("input[type=submit]").style.backgroundColor =
+            "gray";
+          e.target.querySelector("input[type=submit]").value =
+            "Submit For A Review";
+        }, 2000);
+      } else {
+        e.target.classList.remove("load");
+        e.target.classList.add("show");
+        errormessage.current.textContent = "Failed.. Pls Try Again";
+        e.target.querySelector("input[type=submit]").value =
+          "Submit For A Review";
+        e.target.querySelector("input[type=submit]").style.backgroundColor =
+          "gray";
+      }
     }
-  };
-  useEffect(() => {
-    // add();
-  });
-  // add();
-  const inputError = (name, lim, text) => {
-    if (name.length < lim) {
-      return {
-        color: "red",
-        text: text,
-      };
-    }
-    return {
-      color: "",
-      text: "",
-    };
   };
   return (
     <>
@@ -201,7 +210,7 @@ const AddPost = ({ add }) => {
           </div>
           <div className="input-con mb-10 bg-p">
             <label className="mb-10" htmlFor="title">
-              Title or Heading
+              Summary Or Heading
             </label>
             <input
               placeholder="Please Enter The Heading"
@@ -241,11 +250,12 @@ const AddPost = ({ add }) => {
               id="category"
             >
               <option disabled>Please Select A Category</option>
-              <option value="hello">Health</option>
-              <option value="hello">Tech</option>
-              <option value="hello">Celeb</option>
-              <option value="hello">Finance</option>
-              <option value="hello">Relationship</option>
+              <option value="Health">Health</option>
+              <option value="Tech">Tech</option>
+              <option value="Celeb">Celeb</option>
+              <option value="Finance">Finance</option>
+              <option value="Relationship">Relationship</option>
+              <option value="Politics">Politics</option>
             </select>
             <p></p>
           </div>
@@ -253,7 +263,6 @@ const AddPost = ({ add }) => {
             <label className="mb-10" htmlFor="story">
               What Happened ?
             </label>
-
             <textarea
               placeholder="Please Whisper The Latest In Here"
               type="text"
@@ -268,6 +277,15 @@ const AddPost = ({ add }) => {
             <p></p>
           </div>
           <div className="input-con">
+            <p ref={errormessage} className="error-message bg border"></p>
+            <div className="loader" style={{ padding: "0", margin: "0 auto" }}>
+              <ThreeDots
+                height={50}
+                width="100"
+                color="skyblue"
+                ariaLabel="loading"
+              />
+            </div>
             <input type="submit" value="Submit For A Review" />
           </div>
         </form>
@@ -292,6 +310,7 @@ const Section = styled.section`
       font-size: 14px;
     }
     .input-con {
+      position: relative;
       padding: 10px;
       display: flex;
       flex-direction: column;
@@ -312,25 +331,28 @@ const Section = styled.section`
       }
     }
   }
-  form:after {
-    content: "Pls Fill All Fields Correctly";
-    text-align: center;
-    color: white;
-    position: absolute;
-    width: 50%;
-    transform: translateX(50%);
-    height: 20px;
-    background: red;
-    left: 0;
-    bottom: 11%;
-    font-style: italic;
-    font-size: 13px;
-    opacity: 0;
+  .loader {
+    display: none;
   }
-  form.show:after {
+  form.load .loader {
+    display: block;
+  }
+  .error-message {
+    position: absolute;
+    width: 100%;
+    padding: 3px;
+    opacity: 0;
+    top: -30%;
+    left: 0;
+    text-align: center;
+    transition: opacity 0.3s linear;
+    font-style: italic;
+    font-size: 14px;
+    color: red;
+  }
+  form.show .error-message {
     opacity: 1;
   }
-
   @media screen and (min-width: 768px) {
     form {
       width: 65%;

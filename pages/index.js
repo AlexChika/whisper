@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
-// import { useEffect, useState } from "react";
-// import { server } from "../config/index";
 import BlogHome from "../components/BlogHome";
 import Header from "../components/Header";
+// import { useEffect, useState } from "react";
+// import { server } from "../config/index";
 export default function Home(props) {
   // const [posts, setPosts] = useState([]);
   // async function getBlogPosts() {
@@ -40,7 +40,7 @@ export async function getStaticProps() {
   const db = client.db();
   const blogPostsCollection = db.collection("posts");
   const blogPosts = await blogPostsCollection.find().toArray();
-  console.log(blogPosts);
+  // console.log(blogPosts);
   return {
     props: {
       blogPost: blogPosts.map((post) => ({
