@@ -40,7 +40,6 @@ export async function getStaticProps() {
   const db = client.db();
   const blogPostsCollection = db.collection("posts");
   const blogPosts = await blogPostsCollection.find().toArray();
-  // console.log(blogPosts);
   return {
     props: {
       blogPost: blogPosts.map((post) => ({
