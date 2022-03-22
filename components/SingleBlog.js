@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
 import Link from "next/link";
-// import useRouter from "next/router";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   TwitterIcon,
@@ -19,14 +18,48 @@ import {
 
 const SingleBlog = ({ post }) => {
   const { id, name, title, url, category, story, date } = post;
-  // const router = useRouter()
-  // const navigate =(linkid)=>{
-  //   router.push('/' + linkid)
-  // }
-
-  let comment = true;
+  const [comments, setComments] = useState([]);
+  const [no, setNo] = useState(2);
+  const viewMoreComments = () => {
+    setNo(comments.length);
+  };
+  async function getPost() {
+    try {
+      const response = await fetch("/api/getComment", {
+        method: "POST",
+        body: JSON.stringify({ id: id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status < 300 && response.status > 180) {
+        console.log("successfull");
+        let result = await response.json();
+        if (result.message === "Comment fetched Successfully!") {
+          console.log("succesfully succesful on fetch");
+          return result.comments;
+        }
+      } else {
+        let result = await response.json();
+        if (result.message !== "Comment fetched Successfully!") {
+          console.log("failed");
+          return [];
+        }
+      }
+    } catch (e) {
+      console.log("failed on 2");
+    }
+  }
+  useEffect(() => {
+    async function call() {
+      const comments = await getPost();
+      console.log(comments);
+      setComments(comments);
+    }
+    call();
+  }, [id, getPost]);
   return (
-    <Wrap comment={comment} className="posts mb-30">
+    <Wrap className="posts mb-30">
       <meta content="" property="og:title" />
       <meta content="" property="og:description" />
       <meta content="article" property="og:type" />
@@ -86,35 +119,53 @@ const SingleBlog = ({ post }) => {
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
             </div>
-            <button>Leave a comment</button>
+            <button>
+              <Link href={`/${id}`}>Leave a comment</Link>
+            </button>
           </div>
           <p className="poster">{name}</p>
         </div>
       </article>
       <article className={`comment-con border mb-30`}>
-        <h3 className={`no-comment ${comment ? "show" : ""}`}>
+        <h3 className={`no-comment ${comments.length ? "show" : ""}`}>
           <span style={{ display: "block", textAlign: "center" }}>😔😔😔</span>
           No Comments
         </h3>
         <div className="comment-inner">
-          <div className={`mb-10 bg comment ${comment ? "show" : ""}`}>
-            <div className="comment-header bg-p">
-              <figure className="border">
-                <img src="/bird-32.png" alt="profile pic" />
-              </figure>
-              <span>name names</span>
-            </div>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-              iusto pariatur atque natus itaque quidem.
-            </p>
-            <div className="comment-footer">
-              <span className="comment-time">12th, tue dec 2022</span>
-            </div>
-          </div>
-          <button className={` ${comment ? "show" : ""}`}>view more</button>
+          {comments.length > 0
+            ? comments
+                .slice(0, no)
+                .reverse()
+                .map((comobj) => {
+                  const { name, comment, date } = comobj;
+                  return (
+                    <div
+                      className={`mb-10 bg comment ${
+                        comments?.length > 1 ? "show" : ""
+                      }`}
+                    >
+                      <div className="comment-header bg-p">
+                        <figure className="border">
+                          <img src="/bird-32.png" alt="profile pic" />
+                        </figure>
+                        <span>{name}</span>
+                      </div>
+                      <p>{comment}</p>
+                      <div className="comment-footer">
+                        <span className="comment-time">{date}</span>
+                      </div>
+                    </div>
+                  );
+                })
+            : ""}
+          <button
+            onClick={viewMoreComments}
+            className={` ${comments.length > 2 ? "show" : ""}`}
+          >
+            view more
+          </button>
         </div>
-        <span className="comment-count">no comments</span>
+        <span className="comment-count">{comments.length} comments</span>
       </article>
     </Wrap>
   );

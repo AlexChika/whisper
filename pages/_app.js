@@ -2,7 +2,7 @@ import Footer from "../components/Footer";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../style/theme.config";
 function MyApp({ Component, pageProps }) {
-  const theme = true;
+  const theme = false;
   return (
     <>
       <ThemeProvider theme={theme ? lightTheme : darkTheme}>

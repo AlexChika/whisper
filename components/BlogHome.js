@@ -58,25 +58,27 @@ const Blog = ({ blogPost }) => {
         </div>
       </Suggested>
       <main>
-        {blogPost.map((post) => {
-          return <SingleBlog post={post} key={post.id} />;
-        })}
+        {blogPost
+          .slice()
+          .reverse()
+          .map((post) => {
+            return <SingleBlog post={post} key={post.id} />;
+          })}
       </main>
     </>
   );
 };
 export default Blog;
-
 export const Banner = ({ children }) => {
   return (
-    <Hero className="mb-30 border">
+    <Hero className="mb-30">
       <div className="hero-hdng-con">
         <h1 className="hero-txt">
           Welcome To <span>Whisper</span>{" "}
         </h1>
       </div>
       <p className="hero-txt-des mb-10">Whispering to your Eyes and Ears</p>
-      <div className="hero-cards">
+      <div className="hero-cards border">
         <figure className="">
           <img src="/whisper1.jpeg" alt="" />
         </figure>

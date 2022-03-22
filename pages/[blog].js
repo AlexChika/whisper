@@ -7,7 +7,6 @@ const Index = (props) => {
   const [post, setPost] = useState({});
   const router = useRouter();
   const id = router.query.blog;
-  console.log(id);
   async function getPost() {
     try {
       const response = await fetch("/api/oneblog", {

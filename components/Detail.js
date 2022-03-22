@@ -1,4 +1,5 @@
 import { BallTriangle } from "react-loader-spinner";
+import { getdate } from "./AddPost";
 import {
   TwitterIcon,
   TwitterShareButton,
@@ -16,10 +17,59 @@ import {
 import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
+import { useRef, useState } from "react";
 const Detail = ({ post }) => {
   const id = post?._id;
   const { title, url, category, story, date } = post || {};
-  let comment = true;
+  const commentCollect = useRef(null);
+  const [nameCollect, setNameCollect] = useState("");
+  const commentHandler = (e) => {
+    setNameCollect(e.target.value);
+  };
+  async function postComment(commentobj) {
+    try {
+      const response = await fetch("/api/postcomment", {
+        method: "POST",
+        body: JSON.stringify(commentobj),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status < 300 && response.status > 180) {
+        console.log("successfull");
+        let result = await response.json();
+        if (result.message === "Comment sent Successfully!") {
+          console.log("successfully succesful");
+        }
+      } else {
+        let result = await response.json();
+        if (result.message !== "Comment sent Successfully!") {
+          console.log("failed");
+        }
+      }
+    } catch (e) {
+      console.log("failed on 2");
+    }
+  }
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    if (
+      !commentCollect.current.textContent ||
+      commentCollect.current.textContent.trim().length < 2 ||
+      !nameCollect ||
+      nameCollect.trim().length < 4
+    )
+      return;
+    const comment = commentCollect.current.textContent;
+    const name = nameCollect;
+    const date = getdate();
+    const commentobj = { comment, name, id, date };
+    postComment(commentobj);
+    commentCollect.current.textContent = "";
+    setNameCollect("");
+  };
+  let comment = false;
+
   return (
     <>
       {post.title ? (
@@ -65,25 +115,35 @@ const Detail = ({ post }) => {
                 <div className="post-share">
                   <div>
                     <h4 className="mb-20">Comment Here </h4>
-                    <form>
+                    <form onSubmit={handleCommentSubmit}>
                       <div className="input-con mb-10 bg-p">
                         <label className="mb-10" htmlFor="comment">
                           Whisper Your Thoughts
                         </label>
+                        <input
+                          placeholder="Enter Your Name"
+                          type="text"
+                          id="name"
+                          className="bg mb-10"
+                          name="name"
+                          value={nameCollect}
+                          onChange={commentHandler}
+                        />
                         <div
+                          ref={commentCollect}
                           className="bg input"
                           id="comment"
                           contentEditable="true"
                         ></div>
+                        <p></p>
                       </div>
                       <div className="submit-con">
                         <input type="submit" value="Comment" />
-                        <button className="border">
-                          Like <i className="bi bi-heart-fill"></i>
-                        </button>
-                        <button className="border">
-                          Dislike{" "}
+                        <button className="">
                           <i className="bi bi-hand-thumbs-down-fill"></i>
+                        </button>
+                        <button className="">
+                          <i className="bi bi-heart-fill"></i>
                         </button>
                       </div>
                     </form>
@@ -176,7 +236,7 @@ const Detail = ({ post }) => {
             color="grey"
             ariaLabel="loading-indicator"
           />
-          Please Wait...
+          One Moment...
         </Load>
       )}
     </>
@@ -239,22 +299,23 @@ const Wrap = styled.section`
       .input {
         padding: 15px 10px;
       }
-      input[type="submit"] {
-        background: tomato;
+      input[type="text"] {
+        padding: 10px 0;
       }
     }
     .post-share .submit-con {
       padding: 10px;
       display: flex;
-      input,
       button {
         margin: 0 3px;
-        padding: 15px 0;
+        padding: 5px 0;
         border-radius: 20px;
       }
+
       input[type="submit"] {
-        background: tomato;
+        border: 2px solid rgb(17, 227, 241);
         flex: 0.5;
+        background: none;
       }
       button {
         flex: 0.25;
@@ -263,6 +324,13 @@ const Wrap = styled.section`
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
+        font-size: 30px;
+      }
+      button:first-of-type {
+        color: red;
+      }
+      button:last-of-type {
+        color: rgb(17, 227, 241);
       }
     }
     .post-share > span {

@@ -2,6 +2,46 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { Banner } from "../components/BlogHome";
+export function getdate() {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const cal = new Date();
+    const date = cal.getDate();
+    let hour = cal.getHours();
+    let sub;
+    if (date === 1 || date === 21 || date === 31) {
+      sub = "ist";
+    } else if (date === 2 || date === 22) {
+      sub = "nd";
+    } else if (date === 3 || date === 23) {
+      sub = "rd";
+    } else {
+      sub = "th";
+    }
+    let am;
+    if (hour > 12) {
+      hour = hour - 12;
+      am = "pm";
+    } else {
+      am = "am";
+    }
+    return `${days[cal.getDay()]} ${date + sub} ${
+      months[cal.getMonth()]
+    } ${hour}:${cal.getMinutes()}${am}`;
+  }
 let pass = {
   names: false,
   title: false,
@@ -94,46 +134,6 @@ const AddPost = ({ add }) => {
       setInputs({ ...inputs, [name]: value, passed: false });
     }
   };
-  function getdate() {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const cal = new Date();
-    const date = cal.getDate();
-    let hour = cal.getHours();
-    let sub;
-    if (date === 1 || date === 21 || date === 31) {
-      sub = "ist";
-    } else if (date === 2 || date === 22) {
-      sub = "nd";
-    } else if (date === 3 || date === 23) {
-      sub = "rd";
-    } else {
-      sub = "th";
-    }
-    let am;
-    if (hour > 12) {
-      hour = hour - 12;
-      am = "pm";
-    } else {
-      am = "am";
-    }
-    return `${days[cal.getDay()]} ${date + sub} ${
-      months[cal.getMonth()]
-    } ${hour}:${cal.getMinutes()}${am}`;
-  }
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const { passed } = inputs;
