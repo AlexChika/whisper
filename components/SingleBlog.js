@@ -35,7 +35,7 @@ const SingleBlog = ({ post }) => {
       <meta content="" itemProp="image_url" />
       <article className="post bg  mb-10">
         <h3 className="mb-20" itemProp="name">
-          {title}
+          {title ? title.substr(0, 100) + "..." : ""}
         </h3>
         <div className="post-header">
           <span className="post-labels mb-10">
@@ -56,11 +56,13 @@ const SingleBlog = ({ post }) => {
           >
             <img src={url} alt={title} />
           </a>
-          <p className="text mb-30">{story}</p>
+          <p className="text mb-30">
+            {story ? story.substr(0, 200) + "..." : ""}
+          </p>
         </div>
         <div className="post-footer">
           <span className="mb-30 border">
-            <Link href="/detail">Read More</Link>
+            <Link href={`/${id}`}>Read More</Link>
           </span>
           <div className="post-share">
             <span>Share</span>
@@ -117,7 +119,6 @@ const SingleBlog = ({ post }) => {
     </Wrap>
   );
 };
-
 export default SingleBlog;
 const Wrap = styled.section`
   margin: 0 auto;

@@ -176,7 +176,7 @@ const AddPost = ({ add }) => {
       } else {
         e.target.classList.remove("load");
         e.target.classList.add("show");
-        errormessage.current.textContent = "Failed.. Pls Try Again";
+        errormessage.current.textContent = "Failed... Pls Try Again";
         e.target.querySelector("input[type=submit]").value =
           "Submit For A Review";
         e.target.querySelector("input[type=submit]").style.backgroundColor =
@@ -187,7 +187,11 @@ const AddPost = ({ add }) => {
   return (
     <>
       <Banner>
-        <h1>Whisper A Post</h1>
+        <h1>
+          {inputs.name
+            ? inputs.name + " Is Whispering A Post"
+            : "Whisper A Post"}
+        </h1>
         <h3>Lets Hear It</h3>
       </Banner>
       <Section className="mb-30">

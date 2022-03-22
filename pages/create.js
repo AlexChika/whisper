@@ -1,9 +1,7 @@
-import { useRouter } from "next/router";
 import Header from "../components/Header";
 import AddPost from "../components/AddPost";
 
 const Create = () => {
-  const router = useRouter();
   async function add(post) {
     try {
       const response = await fetch("/api/createblog", {
@@ -14,7 +12,7 @@ const Create = () => {
         },
       });
       if (response.status < 300 && response.status > 180) {
-        console.log("successfull");
+        // console.log("successfull");
         let result = await response.json();
         if (result.message === "Successfully stored message!") {
           return [true];
@@ -22,7 +20,7 @@ const Create = () => {
       } else {
         let result = await response.json();
         if (result.message !== "Successfully stored message!") {
-          console.log("failed");
+          // console.log("failed");
           return [false];
         }
       }

@@ -59,7 +59,6 @@ const Blog = ({ blogPost }) => {
       </Suggested>
       <main>
         {blogPost.map((post) => {
-          console.log(post.id);
           return <SingleBlog post={post} key={post.id} />;
         })}
       </main>
