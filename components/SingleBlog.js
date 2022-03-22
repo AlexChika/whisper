@@ -15,10 +15,11 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
 } from "next-share";
-
+export let commentsArray;
 const SingleBlog = ({ post }) => {
   const { id, name, title, url, category, story, date } = post;
   const [comments, setComments] = useState([]);
+  commentsArray = comments;
   const [no, setNo] = useState(2);
   const viewMoreComments = () => {
     setNo(comments.length);
@@ -263,6 +264,7 @@ const Wrap = styled.section`
     padding: 5px;
     .comment-inner {
       overflow-y: auto;
+      width: 100%;
     }
     .no-comment {
       color: tomato;
@@ -341,11 +343,3 @@ const Wrap = styled.section`
     }
   }
 `;
-/*
-      border: 2px solid red;
-.comment.show {
-      display: ${(props) => {
-        return props.comment ? "block" : "none";
-      }};
-    }
-*/

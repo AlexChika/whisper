@@ -2,9 +2,10 @@ import Header from "../components/Header";
 import Detail from "../components/Detail";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import { commentsArray } from "../components/SingleBlog";
 const Index = (props) => {
   const [post, setPost] = useState({});
+  const [timeOut, setTimeOut] = useState(false);
   const router = useRouter();
   const id = router.query.blog;
   async function getPost() {
@@ -17,19 +18,22 @@ const Index = (props) => {
         },
       });
       if (response.status < 300 && response.status > 180) {
-        console.log("successfull");
+        // console.log("successfull");
         let result = await response.json();
         if (result.message === "Successfully stored message!") {
           setPost(result.post);
+          setTimeOut(false);
         }
       } else {
         let result = await response.json();
         if (result.message !== "Successfully stored message!") {
-          console.log("failed");
+          // console.log("failed");
+          setTimeOut(true);
         }
       }
     } catch (e) {
-      console.log("failed on 2");
+      // console.log("failed on 2");
+      setTimeOut(true);
     }
   }
   useEffect(() => {
@@ -39,7 +43,7 @@ const Index = (props) => {
   return (
     <>
       <Header />
-      <Detail post={post} />
+      <Detail post={post} timeOut={timeOut} comments={commentsArray} />
     </>
   );
 };

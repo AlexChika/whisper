@@ -18,11 +18,15 @@ import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
 import { useRef, useState } from "react";
-const Detail = ({ post }) => {
+const Detail = ({ post, timeOut, comments }) => {
   const id = post?._id;
   const { title, url, category, story, date } = post || {};
   const commentCollect = useRef(null);
   const [nameCollect, setNameCollect] = useState("");
+  const [no, setNo] = useState(2);
+  const viewMoreComments = () => {
+    setNo(comments.length);
+  };
   const commentHandler = (e) => {
     setNameCollect(e.target.value);
   };
@@ -68,11 +72,10 @@ const Detail = ({ post }) => {
     commentCollect.current.textContent = "";
     setNameCollect("");
   };
-  let comment = false;
 
   return (
     <>
-      {post.title ? (
+      {post?.title ? (
         <div>
           <Banner>
             <p>{title ? title.substr(0, 100) + "..." : ""}</p>
@@ -185,58 +188,64 @@ const Detail = ({ post }) => {
               </div>
             </article>
             <article className={`comment-con mb-30`}>
-              <h3 className={`no-comment ${comment ? "show" : ""}`}>
+              <h3 className={`no-comment ${comments.length > 0 ? "show" : ""}`}>
                 <span style={{ display: "block", textAlign: "center" }}>
                   😔😔😔
                 </span>
                 No Comments
               </h3>
-              <div className={`mb-10 bg comment ${comment ? "show" : ""}`}>
-                <div className="comment-header bg-p">
-                  <figure className="border">
-                    <img src="/bird-32.png" alt="profile pic" />
-                  </figure>
-                  <span>name names</span>
-                </div>
-                <p>adipisicing elit. Eaque</p>
-                <div className="comment-footer">
-                  <span className="comment-time">12th, tue dec 2022</span>
-                </div>
-              </div>
-              <div className={`mb-10 bg comment ${comment ? "show" : ""}`}>
-                <div className="comment-header bg-p">
-                  <figure className="border">
-                    <img src="/bird-32.png" alt="profile pic" />
-                  </figure>
-                  <span>name names</span>
-                </div>
-                <p>
-                  adipisicing elit. Eaque Lorem ipsum dolor sit amet
-                  consectetur, adipisicing elit. Ipsa, impedit eaque! Deserunt
-                  excepturi amet, iure rem repellendus sunt cupiditate itaque
-                  non facere eos labore reiciendis, suscipit magni vel. Quasi ad
-                  quos doloribus ut quis assumenda inventore sint at incidunt
-                  optio sit vero est, dolores recusandae provident alias
-                  veritatis nulla. Beatae.
-                </p>
-                <div className="comment-footer">
-                  <span className="comment-time">12th, tue dec 2022</span>
-                </div>
-              </div>
-              <button className={` ${comment ? "show" : ""}`}>view more</button>
-              <span className="comment-count">no comments</span>
+              {comments.length > 0
+                ? comments
+                    .slice(0, no)
+                    .reverse()
+                    .map((comobj) => {
+                      const { name, comment, date } = comobj;
+                      return (
+                        <div
+                          key={date}
+                          className={`mb-10 bg comment ${
+                            comments?.length > 0 ? "show" : ""
+                          }`}
+                        >
+                          <div className="comment-header bg-p">
+                            <figure className="border">
+                              <img src="/bird-32.png" alt="profile pic" />
+                            </figure>
+                            <span>{name}</span>
+                          </div>
+                          <p>{comment}</p>
+                          <div className="comment-footer">
+                            <span className="comment-time">{date}</span>
+                          </div>
+                        </div>
+                      );
+                    })
+                : ""}
+              <button
+                onClick={viewMoreComments}
+                className={` ${comments.length > 2 ? "show" : ""}`}
+              >
+                view more
+              </button>
+              <span className="comment-count">{comments.length} comments</span>
             </article>
           </Wrap>
         </div>
       ) : (
         <Load aria-label="loader" className="Loader">
-          <BallTriangle
-            heigth="100"
-            width="100"
-            color="grey"
-            ariaLabel="loading-indicator"
-          />
-          One Moment...
+          {timeOut ? (
+            <div>Sorry! Post Not Found</div>
+          ) : (
+            <div>
+              <BallTriangle
+                heigth="100"
+                width="100"
+                color="grey"
+                ariaLabel="loading-indicator"
+              />
+              One Moment...
+            </div>
+          )}
         </Load>
       )}
     </>
