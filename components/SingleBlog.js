@@ -140,6 +140,7 @@ const SingleBlog = ({ post }) => {
                   const { name, comment, date } = comobj;
                   return (
                     <div
+                      key={date}
                       className={`mb-10 bg comment ${
                         comments?.length > 1 ? "show" : ""
                       }`}
