@@ -57,7 +57,7 @@ const SingleBlog = ({ post }) => {
       setComments(comments);
     }
     call();
-  }, [id, getPost]);
+  }, [id]);
   return (
     <Wrap className="posts mb-30">
       <meta content="" property="og:title" />
@@ -127,7 +127,7 @@ const SingleBlog = ({ post }) => {
         </div>
       </article>
       <article className={`comment-con border mb-30`}>
-        <h3 className={`no-comment ${comments.length ? "show" : ""}`}>
+        <h3 className={`no-comment ${comments.length > 0 ? "show" : ""}`}>
           <span style={{ display: "block", textAlign: "center" }}>😔😔😔</span>
           No Comments
         </h3>
@@ -142,7 +142,7 @@ const SingleBlog = ({ post }) => {
                     <div
                       key={date}
                       className={`mb-10 bg comment ${
-                        comments?.length > 1 ? "show" : ""
+                        comments?.length > 0 ? "show" : ""
                       }`}
                     >
                       <div className="comment-header bg-p">
