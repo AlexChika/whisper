@@ -13,16 +13,16 @@ const Header = ({ bg }) => {
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
         />
-        {/* <script
-          async
-          src="https://platform.twitter.com/widgets.js"
-          charset="utf-8"
-        ></script>
-        <script
-          async
-          src="https://platform.linkedin.com/in.js"
-          type="text/javascript"
-        ></script> */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
+          rel="stylesheet"
+        ></link>
         <title>Whisper | The Everyone&apos;s Blog</title>
       </Head>
       <nav className="nav mb-10">
@@ -54,7 +54,6 @@ const Header = ({ bg }) => {
               </Link>
             </Li>
           </ul>
-          {/* <span>X</span> */}
         </div>
       </nav>
       <div></div>

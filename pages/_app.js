@@ -1,11 +1,17 @@
 import Footer from "../components/Footer";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, lightTheme, darkTheme } from "../style/theme.config";
+import { useState, useEffect } from "react";
 function MyApp({ Component, pageProps }) {
-  const theme = false;
+  const [theme, setTheme] = useState("dark");
+  useEffect(() => {
+    const storagetheme = localStorage.getItem("theme");
+    setTheme(storagetheme);
+  });
+  var isTrueSet = theme === "light";
   return (
     <>
-      <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+      <ThemeProvider theme={isTrueSet ? lightTheme : darkTheme}>
         <GlobalStyles />
         <Component {...pageProps} />
         <Footer />
@@ -15,4 +21,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-// theme ? lightTheme : darkTheme

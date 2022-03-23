@@ -15,11 +15,18 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
 } from "next-share";
-export let commentsArray;
 const SingleBlog = ({ post }) => {
   const { id, name, title, url, category, story, date } = post;
   const [comments, setComments] = useState([]);
-  commentsArray = comments;
+  const [accent, setAccent] = useState({
+    color1: "red",
+    color2: "rgb(17, 227, 241)",
+  });
+  useEffect(() => {
+    if (localStorage.getItem("accent")) {
+      setAccent(JSON.parse(localStorage.getItem("accent")));
+    }
+  }, []);
   const [no, setNo] = useState(2);
   const viewMoreComments = () => {
     setNo(comments.length);
@@ -34,16 +41,16 @@ const SingleBlog = ({ post }) => {
         },
       });
       if (response.status < 300 && response.status > 180) {
-        console.log("successfull");
+        // console.log("successfull");
         let result = await response.json();
         if (result.message === "Comment fetched Successfully!") {
-          console.log("succesfully succesful on fetch");
+          // console.log("succesfully succesful on fetch");
           return result.comments;
         }
       } else {
         let result = await response.json();
         if (result.message !== "Comment fetched Successfully!") {
-          console.log("failed");
+          // console.log("failed");
           return [];
         }
       }
@@ -59,7 +66,7 @@ const SingleBlog = ({ post }) => {
     call();
   }, [id]);
   return (
-    <Wrap className="posts mb-30">
+    <Wrap accent={accent} className="posts mb-30">
       <meta content="" property="og:title" />
       <meta content="" property="og:description" />
       <meta content="article" property="og:type" />
@@ -98,7 +105,7 @@ const SingleBlog = ({ post }) => {
             <Link href={`/${id}`}>Read More</Link>
           </span>
           <div className="post-share">
-            <span>Share</span>
+            <span className="c-accent1">Share</span>
             <div className="post-social">
               <FacebookShareButton url={"https://whispper.vercel.app/detail/"}>
                 <FacebookIcon size={32} round />
@@ -119,7 +126,7 @@ const SingleBlog = ({ post }) => {
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
             </div>
-            <button>
+            <button className="c-accent2">
               <Link href={`/${id}`}>Leave a comment</Link>
             </button>
           </div>
@@ -177,6 +184,12 @@ const Wrap = styled.section`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  .c-accent1 {
+    color: ${(props) => (props.accent ? props.accent.color1 : "")};
+  }
+  .c-accent2 {
+    color: ${(props) => (props.accent ? props.accent.color2 : "")};
+  }
   article {
     width: 100%;
     height: auto;
@@ -240,7 +253,7 @@ const Wrap = styled.section`
       margin: 0 auto;
       font-size: 20px;
       background: none;
-      color: skyblue;
+      /* color: skyblue; */
     }
     .post-share button:active,
     .post-share button:focus {

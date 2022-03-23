@@ -6,12 +6,6 @@ export const lightTheme = {
   secBg: `rgba(255, 255, 255, 0.7
     )`,
 };
-export const lightMixed = {
-  priBg: "black",
-  text: "white",
-  navline: "rgb(160, 160, 160)",
-  secBg: "rgb(160, 160, 160)",
-};
 export const darkTheme = {
   priBg: "rgb(0, 0, 0)",
   text: "white",

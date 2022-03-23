@@ -41,15 +41,15 @@ const Detail = ({ post, timeOut }) => {
         },
       });
       if (response.status < 300 && response.status > 180) {
-        console.log("successfull");
+        // console.log("successfull");
         let result = await response.json();
         if (result.message === "Comment sent Successfully!") {
-          console.log("successfully succesful");
+          // console.log("successfully succesful");
         }
       } else {
         let result = await response.json();
         if (result.message !== "Comment sent Successfully!") {
-          console.log("failed");
+          // console.log("failed");
         }
       }
     } catch (e) {
@@ -103,11 +103,11 @@ const Detail = ({ post, timeOut }) => {
   useEffect(() => {
     async function call() {
       const comments = await getComments();
-      console.log(comments);
+      // console.log(comments);
       setComments(comments);
     }
     call();
-  }, [id]);
+  }, [id, nameCollect]);
   return (
     <>
       {post?.title ? (

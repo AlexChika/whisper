@@ -1,47 +1,47 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import { Banner } from "../components/BlogHome";
 export function getdate() {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const cal = new Date();
-    const date = cal.getDate();
-    let hour = cal.getHours();
-    let sub;
-    if (date === 1 || date === 21 || date === 31) {
-      sub = "ist";
-    } else if (date === 2 || date === 22) {
-      sub = "nd";
-    } else if (date === 3 || date === 23) {
-      sub = "rd";
-    } else {
-      sub = "th";
-    }
-    let am;
-    if (hour > 12) {
-      hour = hour - 12;
-      am = "pm";
-    } else {
-      am = "am";
-    }
-    return `${days[cal.getDay()]} ${date + sub} ${
-      months[cal.getMonth()]
-    } ${hour}:${cal.getMinutes()}${am}`;
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const cal = new Date();
+  const date = cal.getDate();
+  let hour = cal.getHours();
+  let sub;
+  if (date === 1 || date === 21 || date === 31) {
+    sub = "ist";
+  } else if (date === 2 || date === 22) {
+    sub = "nd";
+  } else if (date === 3 || date === 23) {
+    sub = "rd";
+  } else {
+    sub = "th";
   }
+  let am;
+  if (hour > 12) {
+    hour = hour - 12;
+    am = "pm";
+  } else {
+    am = "am";
+  }
+  return `${days[cal.getDay()]} ${date + sub} ${
+    months[cal.getMonth()]
+  } ${hour}:${cal.getMinutes()}${am}`;
+}
 let pass = {
   names: false,
   title: false,
@@ -79,7 +79,7 @@ const AddPost = ({ add }) => {
       if (value.length < 100) {
         e.target.nextElementSibling.style.color = "red";
         e.target.nextElementSibling.textContent =
-          "Title Must Be Atleast 100 Characters";
+          "Summary Must Be Atleast 100 Characters";
         pass = { ...pass, title: false };
       } else {
         e.target.nextElementSibling.style.color = "";
@@ -194,7 +194,7 @@ const AddPost = ({ add }) => {
         </h1>
         <h3>Lets Hear It</h3>
       </Banner>
-      <Section className="mb-30">
+      <Section>
         <form onSubmit={onSubmitHandler} className="bg">
           <h2 className="mb-10">Create A Post</h2>
           <div className="input-con mb-10 bg-p">
@@ -217,7 +217,7 @@ const AddPost = ({ add }) => {
               Summary Or Heading
             </label>
             <input
-              placeholder="Please Enter The Heading"
+              placeholder="Please Enter The Summary"
               type="text"
               id="title"
               className="bg mb-10"
@@ -301,6 +301,7 @@ const AddPost = ({ add }) => {
 export default AddPost;
 const Section = styled.section`
   margin: 0 auto;
+  margin-bottom: 30px;
   form {
     position: relative;
     margin: 0 auto;

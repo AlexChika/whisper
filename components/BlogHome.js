@@ -1,7 +1,17 @@
 import SingleBlog from "./SingleBlog";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import styled from "styled-components";
 const Blog = ({ blogPost }) => {
+  const [accent, setAccent] = useState({
+    color1: "red",
+    color2: "rgb(17, 227, 241)",
+  });
+  useEffect(() => {
+    if (localStorage.getItem("accent")) {
+      setAccent(JSON.parse(localStorage.getItem("accent")));
+    }
+  }, []);
   useEffect(() => {
     document.addEventListener("contextmenu", function (e) {
       // e.preventDefault();
@@ -32,27 +42,26 @@ const Blog = ({ blogPost }) => {
       >
         Most Viewed (Popular) Posts
       </h3>
-      <Suggested className="mb-30 border">
-        <button className="bg color">see more..</button>
+      <Suggested accent={accent} className="mb-30 border">
         <div className="suggested">
-          {blogPost.map((post) => {
+          {blogPost.slice(0, 8).map((post) => {
+            const { url, title, category, date, name, id } = post;
             return (
-              <div key={post.id} className="sug-card-con bg">
-                <figure className="">
-                  <img src="/whisperanim.png" alt="" />
-                </figure>
-                <div className="sug-desc-con">
-                  <p className="sug-title">
-                    This guest bedroom was so blaaag unwelcoming. Take a look at
-                    my
-                  </p>
-                  <p className="sug-ctg">category</p>
-                  <div className="sug-dt bg-p">
-                    <p>14th march 2022</p>
-                    <span>com</span> <span>lik</span>
+              <Link key={post.id} href={`/${id}`}>
+                <div className="sug-card-con bg">
+                  <figure className="">
+                    <img src={url} alt="" />
+                  </figure>
+                  <div className="sug-desc-con">
+                    <p className="sug-title">{title.substr(0, 55) + "..."}</p>
+                    <p className="sug-nme c-accent1">{name}</p>
+                    <div className="sug-dt bg-p">
+                      <p>{date}</p>
+                      <span>{category}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -194,6 +203,12 @@ const Hero = styled.div`
 `;
 /* ...... */
 const Suggested = styled.div`
+  .c-accent1 {
+    color: ${(props) => (props.accent ? props.accent.color1 : "")};
+  }
+  .c-accent2 {
+    color: ${(props) => (props.accent ? props.accent.color2 : "")};
+  }
   position: relative;
   padding: 5px;
   .suggested {
@@ -205,13 +220,6 @@ const Suggested = styled.div`
     -webkit-scroll-snap-type: x mandatory;
     -moz-scroll-snap-type: x mandatory;
     -ms-scroll-snap-type: x mandatory;
-  }
-  button {
-    position: absolute;
-    width: 100px;
-    height: 35px;
-    right: 0;
-    opacity: 0.5;
   }
   .sug-card-con {
     display: inline-block;
@@ -232,19 +240,18 @@ const Suggested = styled.div`
     width: 100%;
   }
   .sug-desc-con {
-    padding: 5px 5px;
+    padding: 5px 10px;
   }
   .sug-title {
     font-weight: 100;
     font-size: 15px;
   }
-  .sug-ctg {
-    opacity: 0.5;
+  .sug-nme {
+    text-align: center;
   }
   .sug-dt {
     font-size: 13px;
     display: flex;
-    justify-content: space-around;
-    color: tomato;
+    justify-content: space-between;
   }
 `;
