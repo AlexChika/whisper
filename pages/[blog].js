@@ -2,7 +2,6 @@ import Header from "../components/Header";
 import Detail from "../components/Detail";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { commentsArray } from "../components/SingleBlog";
 const Index = (props) => {
   const [post, setPost] = useState({});
   const [timeOut, setTimeOut] = useState(false);
@@ -43,7 +42,7 @@ const Index = (props) => {
   return (
     <>
       <Header />
-      <Detail post={post} timeOut={timeOut} comments={commentsArray} />
+      <Detail post={post} timeOut={timeOut} />
     </>
   );
 };

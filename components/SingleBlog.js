@@ -24,7 +24,7 @@ const SingleBlog = ({ post }) => {
   const viewMoreComments = () => {
     setNo(comments.length);
   };
-  async function getPost() {
+  async function getComments() {
     try {
       const response = await fetch("/api/getComment", {
         method: "POST",
@@ -53,8 +53,7 @@ const SingleBlog = ({ post }) => {
   }
   useEffect(() => {
     async function call() {
-      const comments = await getPost();
-      console.log(comments);
+      const comments = await getComments();
       setComments(comments);
     }
     call();

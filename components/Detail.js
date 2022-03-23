@@ -17,12 +17,13 @@ import {
 import { Banner } from "../components/BlogHome";
 import styled from "styled-components";
 import Link from "next/link";
-import { useRef, useState } from "react";
-const Detail = ({ post, timeOut, comments }) => {
+import { useRef, useState, useEffect } from "react";
+const Detail = ({ post, timeOut }) => {
   const id = post?._id;
   const { title, url, category, story, date } = post || {};
   const commentCollect = useRef(null);
   const [nameCollect, setNameCollect] = useState("");
+  const [comments, setComments] = useState([]);
   const [no, setNo] = useState(2);
   const viewMoreComments = () => {
     setNo(comments.length);
@@ -72,7 +73,41 @@ const Detail = ({ post, timeOut, comments }) => {
     commentCollect.current.textContent = "";
     setNameCollect("");
   };
-
+  async function getComments() {
+    try {
+      const response = await fetch("/api/getComment", {
+        method: "POST",
+        body: JSON.stringify({ id: id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status < 300 && response.status > 180) {
+        console.log("successfull");
+        let result = await response.json();
+        if (result.message === "Comment fetched Successfully!") {
+          console.log("succesfully succesful on fetch");
+          return result.comments;
+        }
+      } else {
+        let result = await response.json();
+        if (result.message !== "Comment fetched Successfully!") {
+          console.log("failed");
+          return [];
+        }
+      }
+    } catch (e) {
+      console.log("failed on 2");
+    }
+  }
+  useEffect(() => {
+    async function call() {
+      const comments = await getComments();
+      console.log(comments);
+      setComments(comments);
+    }
+    call();
+  }, [id]);
   return (
     <>
       {post?.title ? (
@@ -188,46 +223,60 @@ const Detail = ({ post, timeOut, comments }) => {
               </div>
             </article>
             <article className={`comment-con mb-30`}>
-              <h3 className={`no-comment ${comments.length > 0 ? "show" : ""}`}>
+              <h3
+                className={`no-comment ${
+                  comments ? (comments.length > 0 ? "show" : "") : ""
+                }`}
+              >
                 <span style={{ display: "block", textAlign: "center" }}>
                   😔😔😔
                 </span>
                 No Comments
               </h3>
-              {comments.length > 0
-                ? comments
-                    .slice(0, no)
-                    .reverse()
-                    .map((comobj) => {
-                      const { name, comment, date } = comobj;
-                      return (
-                        <div
-                          key={date}
-                          className={`mb-10 bg comment ${
-                            comments?.length > 0 ? "show" : ""
-                          }`}
-                        >
-                          <div className="comment-header bg-p">
-                            <figure className="border">
-                              <img src="/bird-32.png" alt="profile pic" />
-                            </figure>
-                            <span>{name}</span>
+              {comments
+                ? comments.length > 0
+                  ? comments
+                      .slice(0, no)
+                      .reverse()
+                      .map((comobj) => {
+                        const { name, comment, date } = comobj;
+                        return (
+                          <div
+                            key={date}
+                            className={`mb-10 bg comment ${
+                              comments
+                                ? comments.length > 0
+                                  ? "show"
+                                  : ""
+                                : ""
+                            }`}
+                          >
+                            <div className="comment-header bg-p">
+                              <figure className="border">
+                                <img src="/bird-32.png" alt="profile pic" />
+                              </figure>
+                              <span>{name}</span>
+                            </div>
+                            <p>{comment}</p>
+                            <div className="comment-footer">
+                              <span className="comment-time">{date}</span>
+                            </div>
                           </div>
-                          <p>{comment}</p>
-                          <div className="comment-footer">
-                            <span className="comment-time">{date}</span>
-                          </div>
-                        </div>
-                      );
-                    })
+                        );
+                      })
+                  : ""
                 : ""}
               <button
                 onClick={viewMoreComments}
-                className={` ${comments.length > 2 ? "show" : ""}`}
+                className={` ${
+                  comments ? (comments.length > 2 ? "show" : "") : ""
+                }`}
               >
                 view more
               </button>
-              <span className="comment-count">{comments.length} comments</span>
+              <span className="comment-count">
+                {comments ? comments.length : 0} comments
+              </span>
             </article>
           </Wrap>
         </div>
