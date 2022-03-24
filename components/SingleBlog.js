@@ -19,7 +19,7 @@ const SingleBlog = ({ post }) => {
   const { id, name, title, url, category, story, date } = post;
   const [comments, setComments] = useState([]);
   const [accent, setAccent] = useState({
-    color1: "red",
+    color1: "tomato",
     color2: "rgb(17, 227, 241)",
   });
   useEffect(() => {
@@ -79,9 +79,11 @@ const SingleBlog = ({ post }) => {
         </h3>
         <div className="post-header">
           <span className="post-labels mb-10">
-            <Link href="/" rel="tag">
-              {category}
-            </Link>
+            <span className="c-accent1">
+              <Link href="/" rel="tag">
+                {category}
+              </Link>
+            </span>
           </span>
           <abbr className="date-header mb-20" itemProp="datePublished">
             {date}
@@ -102,27 +104,29 @@ const SingleBlog = ({ post }) => {
         </div>
         <div className="post-footer">
           <span className="mb-30 border">
-            <Link href={`/${id}`}>Read More</Link>
+            <span className="c-accent2">
+              <Link href={`/${id}`}>Read More</Link>
+            </span>
           </span>
           <div className="post-share">
             <span className="c-accent1">Share</span>
             <div className="post-social">
-              <FacebookShareButton url={"https://whispper.vercel.app/detail/"}>
+              <FacebookShareButton url={`https://whispper.vercel.app/${id}`}>
                 <FacebookIcon size={32} round />
               </FacebookShareButton>
-              <PinterestShareButton url={"https://whispper.vercel.app/detail/"}>
+              <PinterestShareButton url={`https://whispper.vercel.app/${id}`}>
                 <PinterestIcon size={32} round />
               </PinterestShareButton>
-              <RedditShareButton url={"https://whispper.vercel.app/detail/"}>
+              <RedditShareButton url={`https://whispper.vercel.app/${id}`}>
                 <RedditIcon size={32} round />
               </RedditShareButton>
-              <WhatsappShareButton url={"https://whispper.vercel.app/detail/"}>
+              <WhatsappShareButton url={`https://whispper.vercel.app/${id}`}>
                 <WhatsappIcon size={32} round />
               </WhatsappShareButton>
-              <LinkedinShareButton url={"https://whispper.vercel.app/detail/"}>
+              <LinkedinShareButton url={`https://whispper.vercel.app/${id}`}>
                 <LinkedinIcon size={32} round />
               </LinkedinShareButton>
-              <TwitterShareButton url={"https://whispper.vercel.app/detail/"}>
+              <TwitterShareButton url={`https://whispper.vercel.app/${id}`}>
                 <TwitterIcon size={32} round />
               </TwitterShareButton>
             </div>
@@ -168,7 +172,7 @@ const SingleBlog = ({ post }) => {
             : ""}
           <button
             onClick={viewMoreComments}
-            className={` ${comments.length > 2 ? "show" : ""}`}
+            className={` c-accent2 ${comments.length > 2 ? "show" : ""}`}
           >
             view more
           </button>
@@ -229,6 +233,7 @@ const Wrap = styled.section`
       padding: 15px;
       text-align: center;
       cursor: pointer;
+      font-style: italic;
     }
     .post-share > span {
       text-align: center;
@@ -253,7 +258,7 @@ const Wrap = styled.section`
       margin: 0 auto;
       font-size: 20px;
       background: none;
-      /* color: skyblue; */
+      font-style: italic;
     }
     .post-share button:active,
     .post-share button:focus {
@@ -309,19 +314,18 @@ const Wrap = styled.section`
       display: block;
     }
     .comment-footer {
-      opacity: 0.5;
+      opacity: 0.3;
       font-size: 13px;
+      text-align: center;
     }
     button {
       padding: 10px;
-      color: tomato;
       display: none;
+      background-color: transparent;
+      margin: 0 auto;
     }
     button.show {
       display: block;
-      padding: 10px;
-      color: tomato;
-      margin: 0 auto;
     }
     > span {
       opacity: 0.5;

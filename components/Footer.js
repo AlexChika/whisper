@@ -1,10 +1,19 @@
 import styled from "styled-components";
-
+import { useState, useEffect } from "react";
 const Footer = () => {
+  const [accent, setAccent] = useState({
+    color1: "tomato",
+    color2: "rgb(17, 227, 241)",
+  });
+  useEffect(() => {
+    if (localStorage.getItem("accent")) {
+      setAccent(JSON.parse(localStorage.getItem("accent")));
+    }
+  }, []);
   return (
-    <Foot className="bg">
+    <Foot accent={accent} className="bg">
       <div className="bg-p mb-10 footer-head">
-        <h3>Contact Me</h3>
+        <h3 className="c-accent1">Contact Me</h3>
         <div className="footer-socials">
           <a
             target="_blank"
@@ -53,7 +62,7 @@ const Footer = () => {
         <p>Blog Built With Next.Js, A React FrameWork.</p>
         <p>&copy; Alex Chika 2022 All Rights Reserved</p>
         <small> Check me out @</small> <br />
-        <small>
+        <small className="c-accent2">
           <a
             rel="noopener noreferrer"
             target="_blank"
@@ -69,6 +78,12 @@ const Footer = () => {
 
 export default Footer;
 const Foot = styled.footer`
+  .c-accent1 {
+    color: ${(props) => (props.accent ? props.accent.color1 : "")};
+  }
+  .c-accent2 {
+    color: ${(props) => (props.accent ? props.accent.color2 : "")};
+  }
   padding: 20px 0;
   div {
     width: 90vw;
@@ -122,9 +137,6 @@ const Foot = styled.footer`
     font-size: 15px;
     padding: 7px 0 0 0;
     opacity: 0.5;
-    a {
-      color: teal;
-    }
   }
   @media screen and (max-width: 500px) {
     div .footer-socials {

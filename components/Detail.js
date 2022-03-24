@@ -25,6 +25,15 @@ const Detail = ({ post, timeOut }) => {
   const [nameCollect, setNameCollect] = useState("");
   const [comments, setComments] = useState([]);
   const [no, setNo] = useState(2);
+  const [accent, setAccent] = useState({
+    color1: "tomato",
+    color2: "rgb(17, 227, 241)",
+  });
+  useEffect(() => {
+    if (localStorage.getItem("accent")) {
+      setAccent(JSON.parse(localStorage.getItem("accent")));
+    }
+  }, []);
   const viewMoreComments = () => {
     setNo(comments.length);
   };
@@ -115,7 +124,7 @@ const Detail = ({ post, timeOut }) => {
           <Banner>
             <p>{title ? title.substr(0, 100) + "..." : ""}</p>
           </Banner>
-          <Wrap>
+          <Wrap accent={accent}>
             <meta content="" property="og:title" />
             <meta content="" property="og:description" />
             <meta content="article" property="og:type" />
@@ -152,7 +161,7 @@ const Detail = ({ post, timeOut }) => {
               <div className="post-footer">
                 <div className="post-share">
                   <div>
-                    <h4 className="mb-20">Comment Here </h4>
+                    <h4 className="mb-20 c-accent1">Comment Here </h4>
                     <form onSubmit={handleCommentSubmit}>
                       <div className="input-con mb-10 bg-p">
                         <label className="mb-10" htmlFor="comment">
@@ -177,16 +186,16 @@ const Detail = ({ post, timeOut }) => {
                       </div>
                       <div className="submit-con">
                         <input type="submit" value="Comment" />
-                        <button className="">
+                        <button className="c-accent1">
                           <i className="bi bi-hand-thumbs-down-fill"></i>
                         </button>
-                        <button className="">
+                        <button className="c-accent2">
                           <i className="bi bi-heart-fill"></i>
                         </button>
                       </div>
                     </form>
                   </div>
-                  <span>Share</span>
+                  <span className="c-accent1">Share</span>
                   <div className="post-social">
                     <FacebookShareButton
                       url={"https://whispper.vercel.app/detail/"}
@@ -268,7 +277,7 @@ const Detail = ({ post, timeOut }) => {
                 : ""}
               <button
                 onClick={viewMoreComments}
-                className={` ${
+                className={` c-accent2 ${
                   comments ? (comments.length > 2 ? "show" : "") : ""
                 }`}
               >
@@ -302,6 +311,12 @@ const Detail = ({ post, timeOut }) => {
 };
 export default Detail;
 const Wrap = styled.section`
+  .c-accent1 {
+    color: ${(props) => (props.accent ? props.accent.color1 : "")};
+  }
+  .c-accent2 {
+    color: ${(props) => (props.accent ? props.accent.color2 : "")};
+  }
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
@@ -371,7 +386,8 @@ const Wrap = styled.section`
       }
 
       input[type="submit"] {
-        border: 2px solid rgb(17, 227, 241);
+        border: 2px solid
+          ${(props) => (props.accent ? props.accent.color2 : "")};
         flex: 0.5;
         background: none;
       }
@@ -383,12 +399,6 @@ const Wrap = styled.section`
         align-items: center;
         justify-content: center;
         font-size: 30px;
-      }
-      button:first-of-type {
-        color: red;
-      }
-      button:last-of-type {
-        color: rgb(17, 227, 241);
       }
     }
     .post-share > span {
@@ -451,14 +461,12 @@ const Wrap = styled.section`
     }
     button {
       padding: 10px;
-      color: tomato;
       display: none;
+      margin: 0 auto;
+      background-color: transparent;
     }
     button.show {
       display: block;
-      padding: 10px;
-      color: tomato;
-      margin: 0 auto;
     }
     > span {
       opacity: 0.5;

@@ -15,11 +15,11 @@ const reducer = (state, action) => {
     }
   }
   // ........
-  if (action.type === "RB_ACCENT") {
+  if (action.type === "TB_ACCENT") {
     if (typeof window !== "undefined") {
       localStorage.setItem(
         "accent",
-        JSON.stringify({ color1: "red", color2: " rgb(17, 227, 241)" })
+        JSON.stringify({ color1: "tomato", color2: " rgb(17, 227, 241)" })
       );
     }
   }
@@ -33,11 +33,11 @@ const reducer = (state, action) => {
     }
   }
   // ........
-  if (action.type === "GG_ACCENT") {
+  if (action.type === "GV_ACCENT") {
     if (typeof window !== "undefined") {
       localStorage.setItem(
         "accent",
-        JSON.stringify({ color1: "gold", color2: "green" })
+        JSON.stringify({ color1: "gold", color2: "violet" })
       );
     }
   }
@@ -67,14 +67,14 @@ export default function Settings() {
     if (theme === "dark") {
       dispatch({ type: "BLACK_THEME" });
     }
-    if (accent === "RB") {
-      dispatch({ type: "RB_ACCENT" });
+    if (accent === "TB") {
+      dispatch({ type: "TB_ACCENT" });
     }
     if (accent === "PC") {
       dispatch({ type: "PC_ACCENT" });
     }
-    if (accent === "GG") {
-      dispatch({ type: "GG_ACCENT" });
+    if (accent === "GV") {
+      dispatch({ type: "GV_ACCENT" });
     }
     Router.push("/");
   };
@@ -122,20 +122,20 @@ export default function Settings() {
               <h3>Accent Colors</h3>
               {/*....... //..... */}
               <div className="input">
-                <label className="acclab" htmlFor="rb">
-                  <p>Red and Blue</p>
+                <label className="acclab" htmlFor="tb">
+                  <p>Tomato and Blue</p>
                   <div>
-                    <span className="rb"></span>
-                    <span className="rb"></span>
+                    <span className="tb"></span>
+                    <span className="tb"></span>
                   </div>
                 </label>
                 <input
                   onChange={accentHandleChange}
-                  value="RB"
+                  value="TB"
                   required
                   type="radio"
                   name="accent"
-                  id="rb"
+                  id="tb"
                 />
               </div>
               {/*....... //..... */}
@@ -158,20 +158,20 @@ export default function Settings() {
               </div>
               {/*....... //..... */}
               <div className="input">
-                <label className="acclab" htmlFor="gg">
-                  <p>Gold and Green</p>
+                <label className="acclab" htmlFor="gv">
+                  <p>Gold and Violet</p>
                   <div>
-                    <span className="gg"></span>
-                    <span className="gg"></span>
+                    <span className="gv"></span>
+                    <span className="gv"></span>
                   </div>
                 </label>
                 <input
                   onChange={accentHandleChange}
-                  value="GG"
+                  value="GV"
                   required
                   type="radio"
                   name="accent"
-                  id="gg"
+                  id="gv"
                 />
               </div>
             </div>
@@ -216,30 +216,31 @@ const SettingCon = styled.div`
     .input {
       display: flex;
       align-items: center;
-      /* border: 2px solid blue; */
       width: 100%;
       margin: 0 auto;
       margin-bottom: 10px;
       padding: 10px 0;
-      justify-content: space-around;
+      justify-content: space-between;
       input[type="radio"] {
-        transform: scale(2);
+        transform: scale(1.5);
       }
       .thlab {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex: 0.6;
+        flex: 0.9;
         span {
           display: inline-block;
-          width: 50px;
-          height: 20px;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
         }
         .light {
           background: white;
         }
         .dark {
           background: black;
+          box-shadow: inset 1px 1px 1px gray;
         }
       }
     }
@@ -248,17 +249,18 @@ const SettingCon = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex: 0.7;
+    flex: 0.9;
     span {
       display: inline-block;
-      width: 50px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
     }
-    .rb:first-of-type {
-      background: red;
+    .tb:first-of-type {
+      background: tomato;
     }
-    .rb:last-of-type {
-      background: blue;
+    .tb:last-of-type {
+      background: rgb(17, 227, 241);
     }
     .pc:first-of-type {
       background: pink;
@@ -266,11 +268,17 @@ const SettingCon = styled.div`
     .pc:last-of-type {
       background: chocolate;
     }
-    .gg:first-of-type {
+    .gv:first-of-type {
       background: gold;
     }
-    .gg:last-of-type {
-      background: green;
+    .gv:last-of-type {
+      background: violet;
+    }
+  }
+  @media screen and (max-width: 340px) {
+    .thlab,
+    .acclab {
+      flex-direction: column;
     }
   }
 
@@ -280,6 +288,20 @@ const SettingCon = styled.div`
     }
     form {
       width: 65%;
+    }
+    .thlab {
+      span {
+        width: 50px;
+        height: 20px;
+        border-radius: 10px;
+      }
+    }
+    .acclab {
+      span {
+        width: 50px;
+        height: 20px;
+        border-radius: 10px;
+      }
     }
   }
   @media screen and (min-width: 1000px) {

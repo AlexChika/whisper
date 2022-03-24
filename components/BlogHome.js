@@ -4,7 +4,7 @@ import Link from "next/link";
 import styled from "styled-components";
 const Blog = ({ blogPost }) => {
   const [accent, setAccent] = useState({
-    color1: "red",
+    color1: "tomato",
     color2: "rgb(17, 227, 241)",
   });
   useEffect(() => {
@@ -53,8 +53,8 @@ const Blog = ({ blogPost }) => {
                     <img src={url} alt="" />
                   </figure>
                   <div className="sug-desc-con">
-                    <p className="sug-title">{title.substr(0, 55) + "..."}</p>
                     <p className="sug-nme c-accent1">{name}</p>
+                    <p className="sug-title">{title.substr(0, 55) + "..."}</p>
                     <div className="sug-dt bg-p">
                       <p>{date}</p>
                       <span>{category}</span>
@@ -233,7 +233,7 @@ const Suggested = styled.div`
     margin-right: 1em;
   }
   figure {
-    height: 39vh;
+    height: 38vh;
   }
   figure img {
     height: 100%;
@@ -241,17 +241,23 @@ const Suggested = styled.div`
   }
   .sug-desc-con {
     padding: 5px 10px;
+    line-height: 1.2em;
   }
   .sug-title {
     font-weight: 100;
     font-size: 15px;
+    padding: 5px 0;
   }
   .sug-nme {
-    text-align: center;
+    font-style: italic;
   }
   .sug-dt {
     font-size: 13px;
     display: flex;
     justify-content: space-between;
+    font-style: italic;
+    span {
+      padding-right: 20px;
+    }
   }
 `;
