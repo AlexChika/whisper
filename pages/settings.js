@@ -80,7 +80,16 @@ export default function Settings() {
   };
   return (
     <>
-      <Header bg={"settings"} />
+      <Header bg={"settings"}>
+        <meta
+          name="description"
+          content="Whisper | The EveryOne Blog. Whispering To Your Eyes and Ears. This is a next.js project featuring beautiful layouts and theme changing capabilities"
+        />
+        <title>
+          Settings at Whisper | The Everyone&apos;s Blog| Customise Your Blog |
+          Whisper with Beauty{" "}
+        </title>
+      </Header>
       <SettingCon>
         <form className="bg" onSubmit={HandleSettings}>
           <h2 className="mb-20 c-accent1">Customize Your App&apos;s Theme</h2>

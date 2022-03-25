@@ -41,7 +41,6 @@ const Index = (props) => {
 
   return (
     <>
-      <Header />
       <Detail post={post} timeOut={timeOut} />
     </>
   );

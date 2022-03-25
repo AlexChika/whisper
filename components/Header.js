@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
 import styled from "styled-components";
-const Header = ({ bg }) => {
+const Header = ({ bg, children }) => {
   return (
     <>
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="My First Time With Next Js" />
         <link rel="icon" sizes="60x60" type="image/png" href="/bird.png" />
         <link
           rel="stylesheet"
@@ -23,7 +22,7 @@ const Header = ({ bg }) => {
           href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap"
           rel="stylesheet"
         ></link>
-        <title>Whisper | The Everyone&apos;s Blog</title>
+        {children}
       </Head>
       <nav className="nav mb-10">
         <div>

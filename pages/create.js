@@ -30,7 +30,13 @@ const Create = () => {
   }
   return (
     <>
-      <Header bg={"create"} />
+      <Header bg={"create"}>
+        <meta
+          name="description"
+          content="Whisper To The World at  Whisper | The EveryOne's Blog. Whispering To Your Eyes and Ears. This is a next.js project featuring beautiful layouts and theme changing "
+        />
+        <title>Create Post At Whisper | The Everyone&apos;s Blog</title>
+      </Header>
       <AddPost add={add} />
     </>
   );

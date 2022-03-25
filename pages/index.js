@@ -4,7 +4,13 @@ import Header from "../components/Header";
 export default function Home(props) {
   return (
     <>
-      <Header bg={"home"} />
+      <Header bg={"home"}>
+        <meta
+          name="description"
+          content="Whisper | The EveryOne Blog. Whispering To Your Eyes and Ears. This is a next.js project featuring beautiful layouts and theme changing "
+        />
+        <title>Whisper | The Everyone&apos;s Blog</title>
+      </Header>
       <BlogHome blogPost={props.blogPost} />
     </>
   );

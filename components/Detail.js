@@ -1,5 +1,6 @@
 import { BallTriangle } from "react-loader-spinner";
 import { getdate } from "./AddPost";
+import Header from "./Header";
 import {
   TwitterIcon,
   TwitterShareButton,
@@ -120,7 +121,11 @@ const Detail = ({ post, timeOut }) => {
   return (
     <>
       {post?.title ? (
-        <div>
+        <>
+          <Header>
+            <meta name="description" content={title} />
+            <title>Whisper | The Everyone&apos;s Blog</title>
+          </Header>
           <Banner>
             <p>{title ? title.substr(0, 100) + "..." : ""}</p>
           </Banner>
@@ -288,7 +293,7 @@ const Detail = ({ post, timeOut }) => {
               </span>
             </article>
           </Wrap>
-        </div>
+        </>
       ) : (
         <Load aria-label="loader" className="Loader">
           {timeOut ? (
