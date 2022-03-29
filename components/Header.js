@@ -7,6 +7,10 @@ const Header = ({ bg, children }) => {
       <Head>
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="google-site-verification"
+          content="Y7AhEXjqshRz7CKtM7SSoyyQz4-RxXwebjgPIhgKhVU"
+        />
         <link rel="icon" sizes="60x60" type="image/png" href="/bird.png" />
         <link
           rel="stylesheet"
