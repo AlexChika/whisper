@@ -14,7 +14,7 @@ const Blog = ({ blogPost }) => {
   }, []);
   useEffect(() => {
     document.addEventListener("contextmenu", function (e) {
-      // e.preventDefault();
+      e.preventDefault();
     });
     document.onkeydown = function (e) {
       if (e.keyCode == 123) {
