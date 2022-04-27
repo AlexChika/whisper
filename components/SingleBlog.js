@@ -90,12 +90,7 @@ const SingleBlog = ({ post }) => {
           </abbr>
         </div>
         <div className="post-body" id="" itemProp="description articleBody">
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            className="mb-20"
-            href="/link-to-image"
-          >
+          <a>
             <img src={url} alt={title} />
           </a>
           <p className="text mb-30">

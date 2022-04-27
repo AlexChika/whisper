@@ -44,26 +44,29 @@ const Blog = ({ blogPost }) => {
       </h3>
       <Suggested accent={accent} className="mb-30 border">
         <div className="suggested">
-          {blogPost.slice(0, 8).map((post) => {
-            const { url, title, category, date, name, id } = post;
-            return (
-              <Link key={post.id} href={`/${id}`}>
-                <div className="sug-card-con bg">
-                  <figure className="">
-                    <img src={url} alt="" />
-                  </figure>
-                  <div className="sug-desc-con">
-                    <p className="sug-nme c-accent1">{name}</p>
-                    <p className="sug-title">{title.substr(0, 55) + "..."}</p>
-                    <div className="sug-dt bg-p">
-                      <p>{date}</p>
-                      <span>{category}</span>
+          {blogPost
+            .slice(0, 8)
+            .reverse()
+            .map((post) => {
+              const { url, title, category, date, name, id } = post;
+              return (
+                <Link key={post.id} href={`/${id}`}>
+                  <div className="sug-card-con bg">
+                    <figure className="">
+                      <img src={url} alt="" />
+                    </figure>
+                    <div className="sug-desc-con">
+                      <p className="sug-nme c-accent1">{name}</p>
+                      <p className="sug-title">{title.substr(0, 55) + "..."}</p>
+                      <div className="sug-dt bg-p">
+                        <p>{date}</p>
+                        <span>{category}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            );
-          })}
+                </Link>
+              );
+            })}
         </div>
       </Suggested>
       <main>
