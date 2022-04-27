@@ -25,7 +25,7 @@ const Detail = ({ post, timeOut }) => {
   const commentCollect = useRef(null);
   const [nameCollect, setNameCollect] = useState("");
   const [comments, setComments] = useState([]);
-  const [no, setNo] = useState(2);
+  const [showall, setShowall] = useState(false);
   const [accent, setAccent] = useState({
     color1: "tomato",
     color2: "rgb(17, 227, 241)",
@@ -36,7 +36,7 @@ const Detail = ({ post, timeOut }) => {
     }
   }, []);
   const viewMoreComments = () => {
-    setNo(comments.length);
+    setShowall(true);
   };
   const commentHandler = (e) => {
     setNameCollect(e.target.value);
@@ -115,6 +115,7 @@ const Detail = ({ post, timeOut }) => {
       const comments = await getComments();
       // console.log(comments);
       setComments(comments);
+      console.log(comments);
     }
     call();
   }, [id, nameCollect]);
@@ -247,16 +248,16 @@ const Detail = ({ post, timeOut }) => {
                 </span>
                 No Comments
               </h3>
-              {comments
-                ? comments.length > 0
+              {comments.length > 0
+                ? showall
                   ? comments
-                      .slice(0, no)
+                      .slice(0)
                       .reverse()
                       .map((comobj) => {
-                        const { name, comment, date } = comobj;
+                        const { name, comment, date, _id } = comobj;
                         return (
                           <div
-                            key={date}
+                            key={_id}
                             className={`mb-10 bg comment ${
                               comments
                                 ? comments.length > 0
@@ -278,7 +279,35 @@ const Detail = ({ post, timeOut }) => {
                           </div>
                         );
                       })
-                  : ""
+                  : comments
+                      .slice(-2)
+                      .reverse()
+                      .map((comobj) => {
+                        const { name, comment, date, _id } = comobj;
+                        return (
+                          <div
+                            key={_id}
+                            className={`mb-10 bg comment ${
+                              comments
+                                ? comments.length > 0
+                                  ? "show"
+                                  : ""
+                                : ""
+                            }`}
+                          >
+                            <div className="comment-header bg-p">
+                              <figure className="border">
+                                <img src="/bird-32.png" alt="profile pic" />
+                              </figure>
+                              <span>{name}</span>
+                            </div>
+                            <p>{comment}</p>
+                            <div className="comment-footer">
+                              <span className="comment-time">{date}</span>
+                            </div>
+                          </div>
+                        );
+                      })
                 : ""}
               <button
                 onClick={viewMoreComments}

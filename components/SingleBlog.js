@@ -27,9 +27,9 @@ const SingleBlog = ({ post }) => {
       setAccent(JSON.parse(localStorage.getItem("accent")));
     }
   }, []);
-  const [no, setNo] = useState(2);
+  const [showall, setShowall] = useState(false);
   const viewMoreComments = () => {
-    setNo(comments.length);
+    setShowall(true);
   };
   async function getComments() {
     try {
@@ -64,7 +64,7 @@ const SingleBlog = ({ post }) => {
       setComments(comments);
     }
     call();
-  }, [id]);
+  }, [id, showall]);
   return (
     <Wrap accent={accent} className="posts mb-30">
       <meta content="" property="og:title" />
@@ -144,31 +144,57 @@ const SingleBlog = ({ post }) => {
         </h3>
         <div className="comment-inner">
           {comments.length > 0
-            ? comments
-                .slice(0, no)
-                .reverse()
-                .map((comobj) => {
-                  const { name, comment, date } = comobj;
-                  return (
-                    <div
-                      key={date}
-                      className={`mb-10 bg comment ${
-                        comments?.length > 0 ? "show" : ""
-                      }`}
-                    >
-                      <div className="comment-header bg-p">
-                        <figure className="border">
-                          <img src="/bird-32.png" alt="profile pic" />
-                        </figure>
-                        <span>{name}</span>
+            ? showall
+              ? comments
+                  .slice(0)
+                  .reverse()
+                  .map((comobj) => {
+                    const { name, comment, date, _id } = comobj;
+                    return (
+                      <div
+                        key={_id}
+                        className={`mb-10 bg comment ${
+                          comments ? (comments.length > 0 ? "show" : "") : ""
+                        }`}
+                      >
+                        <div className="comment-header bg-p">
+                          <figure className="border">
+                            <img src="/bird-32.png" alt="profile pic" />
+                          </figure>
+                          <span>{name}</span>
+                        </div>
+                        <p>{comment}</p>
+                        <div className="comment-footer">
+                          <span className="comment-time">{date}</span>
+                        </div>
                       </div>
-                      <p>{comment}</p>
-                      <div className="comment-footer">
-                        <span className="comment-time">{date}</span>
+                    );
+                  })
+              : comments
+                  .slice(-2)
+                  .reverse()
+                  .map((comobj) => {
+                    const { name, comment, date, _id } = comobj;
+                    return (
+                      <div
+                        key={_id}
+                        className={`mb-10 bg comment ${
+                          comments ? (comments.length > 0 ? "show" : "") : ""
+                        }`}
+                      >
+                        <div className="comment-header bg-p">
+                          <figure className="border">
+                            <img src="/bird-32.png" alt="profile pic" />
+                          </figure>
+                          <span>{name}</span>
+                        </div>
+                        <p>{comment}</p>
+                        <div className="comment-footer">
+                          <span className="comment-time">{date}</span>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })
+                    );
+                  })
             : ""}
           <button
             onClick={viewMoreComments}
