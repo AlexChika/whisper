@@ -45,7 +45,7 @@ const Footer = () => {
           <a
             rel="noopener noreferrer"
             target="_blank"
-            href="https://wa.me/2349024783759?text=Hello%20Alex,%20How%20You%20Bro"
+            href="https://wa.me/2349024783759?text=Hello%20Alex,%20How%20You%20Today?"
           >
             <span data-tooltip="Whattsapp" className="bg">
               <i className="bi bi-whatsapp"></i>

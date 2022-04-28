@@ -66,21 +66,24 @@ const Detail = ({ post, timeOut }) => {
       console.log("failed on 2");
     }
   }
-  const handleCommentSubmit = (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (
       !commentCollect.current.textContent ||
       commentCollect.current.textContent.trim().length < 2 ||
       !nameCollect ||
       nameCollect.trim().length < 4
-    )
+    ) {
+      e.currentTarget.style.boxShadow = "2px 2px 7px red";
       return;
+    }
+    e.currentTarget.style.boxShadow = "";
     const comment = commentCollect.current.textContent;
     const name = nameCollect;
     const date = getdate();
     const commentobj = { comment, name, id, date };
-    postComment(commentobj);
     commentCollect.current.textContent = "";
+    await postComment(commentobj);
     setNameCollect("");
   };
   async function getComments() {
@@ -113,9 +116,7 @@ const Detail = ({ post, timeOut }) => {
   useEffect(() => {
     async function call() {
       const comments = await getComments();
-      // console.log(comments);
       setComments(comments);
-      console.log(comments);
     }
     call();
   }, [id, nameCollect]);
@@ -204,32 +205,32 @@ const Detail = ({ post, timeOut }) => {
                   <span className="c-accent1">Share</span>
                   <div className="post-social">
                     <FacebookShareButton
-                      url={"https://whispper.vercel.app/detail/"}
+                      url={`https://whispper.vercel.app/${id}`}
                     >
                       <FacebookIcon size={32} round />
                     </FacebookShareButton>
                     <PinterestShareButton
-                      url={"https://whispper.vercel.app/detail/"}
+                      url={`https://whispper.vercel.app/${id}`}
                     >
                       <PinterestIcon size={32} round />
                     </PinterestShareButton>
                     <RedditShareButton
-                      url={"https://whispper.vercel.app/detail/"}
+                      url={`https://whispper.vercel.app/${id}`}
                     >
                       <RedditIcon size={32} round />
                     </RedditShareButton>
                     <WhatsappShareButton
-                      url={"https://whispper.vercel.app/detail/"}
+                      url={`https://whispper.vercel.app/${id}`}
                     >
                       <WhatsappIcon size={32} round />
                     </WhatsappShareButton>
                     <LinkedinShareButton
-                      url={"https://whispper.vercel.app/detail/"}
+                      url={`https://whispper.vercel.app/${id}`}
                     >
                       <LinkedinIcon size={32} round />
                     </LinkedinShareButton>
                     <TwitterShareButton
-                      url={"https://whispper.vercel.app/detail/"}
+                      url={`https://whispper.vercel.app/${id}`}
                     >
                       <TwitterIcon size={32} round />
                     </TwitterShareButton>
